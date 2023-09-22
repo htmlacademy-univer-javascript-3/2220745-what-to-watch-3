@@ -1,20 +1,28 @@
 import { Film } from '../const.ts';
 import { Link } from 'react-router-dom';
+import VideoPlayer from './VideoPlayer.tsx';
 
 type MovieCardProps = {
   film: Film;
-  setFunc: (id: string | null) => void;
+  activeFilm: string | null;
+  onMouseOver: (id: string) => void;
+  onMouseOut: () => void;
 };
 
-export default function MovieCard({ film, setFunc }: MovieCardProps) {
+export default function MovieCard({
+  film,
+  activeFilm,
+  onMouseOver,
+  onMouseOut,
+}: MovieCardProps) {
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseOver={() => setFunc(film.id)}
-      onMouseOut={() => setFunc(null)}
+      onMouseOver={() => onMouseOver(film.id)}
+      onMouseOut={() => onMouseOut()}
     >
       <div className="small-film-card__image">
-        <img src={film.previewImage} alt={film.name} width="280" height="175" />
+        <VideoPlayer film={film} activeFilm={activeFilm} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`films/${film.id}`}>
