@@ -1,24 +1,28 @@
-export default function Movie() {
+import { FilmCard } from '../const.ts';
+import { Link } from 'react-router-dom';
+
+type MoviePageProps = {
+  filmCard: FilmCard;
+};
+
+export default function MoviePage({ filmCard }: MoviePageProps) {
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
-            />
+            <img src={filmCard.backgroundImage} alt={filmCard.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <ul className="user-block">
@@ -40,14 +44,15 @@ export default function Movie() {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{filmCard.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{filmCard.genre}</span>
+                <span className="film-card__year">{filmCard.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button
+                <Link
+                  to={`/player/${filmCard.id}`}
                   className="btn btn--play film-card__button"
                   type="button"
                 >
@@ -55,7 +60,7 @@ export default function Movie() {
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button
                   className="btn btn--list film-card__button"
                   type="button"
@@ -66,9 +71,9 @@ export default function Movie() {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">
+                <Link to={`review`} className="btn film-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -78,8 +83,8 @@ export default function Movie() {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={filmCard.posterImage}
+                alt={filmCard.name}
                 width="218"
                 height="327"
               />
@@ -107,36 +112,24 @@ export default function Movie() {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
+                <div className="film-rating__score">{filmCard.rating * 2}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
+                  <span className="film-rating__count">
+                    {filmCard.scoresCount} ratings
+                  </span>
                 </p>
               </div>
 
               <div className="film-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European
-                  ski resort, presided over by concierge Gustave H. (Ralph
-                  Fiennes). Zero, a junior lobby boy, becomes Gustaves friend
-                  and protege.
-                </p>
-
-                <p>
-                  Gustave prides himself on providing first-className service to
-                  the hotels guests, including satisfying the sexual needs of
-                  the many elderly women who stay there. When one of Gustaves
-                  lovers dies mysteriously, Gustave finds himself the recipient
-                  of a priceless painting and the chief suspect in her murder.
-                </p>
-
+                {filmCard.description}
                 <p className="film-card__director">
-                  <strong>Director: Wes Anderson</strong>
+                  <strong>Director: {filmCard.director}</strong>
                 </p>
 
                 <p className="film-card__starring">
                   <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
+                    Starring: {filmCard.starring.join(', ') + ' '}
                     and other
                   </strong>
                 </p>

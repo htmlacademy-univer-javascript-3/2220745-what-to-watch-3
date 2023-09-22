@@ -1,18 +1,25 @@
-export default function MovieCard() {
+import { Film } from '../const.ts';
+import { Link } from 'react-router-dom';
+
+type MovieCardProps = {
+  film: Film;
+  setFunc: (id: string | null) => void;
+};
+
+export default function MovieCard({ film, setFunc }: MovieCardProps) {
   return (
-    <article className="small-film-card catalog__films-card">
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseOver={() => setFunc(film.id)}
+      onMouseOut={() => setFunc(null)}
+    >
       <div className="small-film-card__image">
-        <img
-          src="img/what-we-do-in-the-shadows.jpg"
-          alt="What We Do in the Shadows"
-          width="280"
-          height="175"
-        />
+        <img src={film.previewImage} alt={film.name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
-          What We Do in the Shadows
-        </a>
+        <Link className="small-film-card__link" to={`films/${film.id}`}>
+          {film.name}
+        </Link>
       </h3>
     </article>
   );

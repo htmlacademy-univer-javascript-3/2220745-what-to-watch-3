@@ -1,20 +1,18 @@
-import MovieCard from '../components/MovieCard.tsx';
+import { Film, PromoFilm } from '../const.ts';
+import MoviesList from '../components/MoviesList.tsx';
+import { Link } from 'react-router-dom';
 
 export type MainPageProps = {
-  title: string;
-  genre: string;
-  date: number;
+  promoFilm: PromoFilm;
+  films: Film[];
 };
 
-export default function MainPage({ title, genre, date }: MainPageProps) {
+export default function MainPage({ films, promoFilm }: MainPageProps) {
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
-          />
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -49,22 +47,23 @@ export default function MainPage({ title, genre, date }: MainPageProps) {
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={promoFilm.posterImage}
+                alt={promoFilm.name}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{date}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button
+                <Link
+                  to={`player/${promoFilm.id}`}
                   className="btn btn--play film-card__button"
                   type="button"
                 >
@@ -72,7 +71,7 @@ export default function MainPage({ title, genre, date }: MainPageProps) {
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button
                   className="btn btn--list film-card__button"
                   type="button"
@@ -81,7 +80,7 @@ export default function MainPage({ title, genre, date }: MainPageProps) {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{films.length}</span>
                 </button>
               </div>
             </div>
@@ -146,27 +145,7 @@ export default function MainPage({ title, genre, date }: MainPageProps) {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-          </div>
+          <MoviesList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

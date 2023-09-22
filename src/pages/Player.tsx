@@ -1,11 +1,27 @@
-export default function Player() {
+import { FilmCard } from '../const.ts';
+import { Link } from 'react-router-dom';
+
+type PlayerProps = {
+  film: FilmCard;
+};
+
+export default function Player({ film }: PlayerProps) {
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg" />
+      <video
+        src={film.videoLink}
+        className="player__video"
+        poster={film.backgroundImage}
+      />
 
-      <button type="button" className="player__exit">
+      <Link
+        to="/"
+        style={{ textDecoration: 'none' }}
+        type="button"
+        className="player__exit"
+      >
         Exit
-      </button>
+      </Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
