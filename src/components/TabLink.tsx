@@ -11,7 +11,7 @@ export default function TabLink({ tabType, activeTab, onClick }: TabLinkProps) {
   return (
     <li
       className={`film-nav__item ${
-        tabType === activeTab && 'film-nav__item--active'
+        tabType === activeTab ? 'film-nav__item--active' : ''
       }`}
       onClick={onClick}
       id={tabType}

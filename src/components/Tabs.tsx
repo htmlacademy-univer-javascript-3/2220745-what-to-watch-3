@@ -1,4 +1,4 @@
-import { FilmCard, Comment, TabType } from '../const.ts';
+import { FilmCard, TabType } from '../const.ts';
 import Overview from './Overview.tsx';
 import { SyntheticEvent, useState } from 'react';
 import Details from './Details.tsx';
@@ -8,7 +8,6 @@ import { comments } from '../mocks/comments.ts';
 
 type TabsProps = {
   filmCard: FilmCard;
-  comments: Comment[];
 };
 export default function Tabs({ filmCard }: TabsProps) {
   const [activeTab, setActiveTab] = useState(TabType.Overview);

@@ -1,13 +1,6 @@
 import MainPage from './pages/MainPage.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {
-  AppRoute,
-  AuthorizationStatus,
-  Film,
-  FilmCard,
-  PromoFilm,
-  Comment,
-} from './const.ts';
+import { AppRoute, AuthorizationStatus, Film, PromoFilm } from './const.ts';
 import SignIn from './pages/SignIn.tsx';
 import Player from './pages/Player.tsx';
 import MoviePage from './pages/MoviePage.tsx';
@@ -19,10 +12,8 @@ import { filmCard } from './mocks/filmCard.ts';
 import { comments } from './mocks/comments.ts';
 
 type AppProps = {
-  promoFilm: PromoFilm;
-  filmCard: FilmCard;
   films: Film[];
-  comments: Comment[];
+  promoFilm: PromoFilm;
 };
 
 export default function App({ films, promoFilm }: AppProps) {

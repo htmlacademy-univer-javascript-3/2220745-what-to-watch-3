@@ -1,5 +1,5 @@
 import Rating from './Rating.tsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 
 export type FormValues = {
   rating: string;
@@ -11,10 +11,9 @@ export default function ReviewForm() {
     rating: '',
     review: '',
   });
-
-  const handleFieldChange = (
-    evt: ChangeEvent<HTMLFormElement | HTMLTextAreaElement>,
-  ) => {
+  const handleFieldChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (evt) => {
     // Код для обновления состояния
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
@@ -29,8 +28,8 @@ export default function ReviewForm() {
           <textarea
             onChange={handleFieldChange}
             className="add-review__textarea"
-            name="review-text"
-            id="review-text"
+            name="review"
+            id="review"
             placeholder="Review text"
           />
           <div className="add-review__submit">

@@ -10,7 +10,7 @@ export const filmCard: FilmCard = {
   backgroundColor: '#B6A99F',
   videoLink: 'https://13.design.pages.academy/static/film/video/bike.mp4',
   description:
-    "In an effort to thwart Grindelwald's plans of raising pure-blood wizards to rule over all non-magical beings, Albus Dumbledore enlists his former student Newt Scamander, who agrees to help, though he's unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.",
+    'In an effort to thwart Grindelwalds plans of raising pure-blood wizards to rule over all non-magical beings, Albus Dumbledore enlists his former student Newt Scamander, who agrees to help, though he unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.',
   rating: 3.4,
   scoresCount: 160757,
   director: 'David Yates',

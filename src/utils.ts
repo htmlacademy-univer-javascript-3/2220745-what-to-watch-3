@@ -6,19 +6,16 @@ const getFormattedTime = (time: number) => {
   return `${hours}h ${minutes}m`;
 };
 
-const getFormattedDate = (date: string) => {
-  return new Date(date).toLocaleString('en-US', {
+const getFormattedDate = (date: string): string =>
+  new Date(date).toLocaleString('en-US', {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
   });
-};
 
-const getFormattedRating = (rating: number) => {
-  return rating.toFixed(1);
-};
+const getFormattedRating = (rating: number) => rating.toFixed(1);
 
-const getFilmGrade = (rating: number) => {
+const getFilmGrade = (rating: number): Grade => {
   if (rating <= 3) {
     return Grade.Bad;
   } else if (rating <= 5) {

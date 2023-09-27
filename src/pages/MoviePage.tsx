@@ -81,7 +81,7 @@ export default function MoviePage({
                   <span className="film-card__count">9</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.Auth && (
-                  <Link to={`review`} className="btn film-card__button">
+                  <Link to={'review'} className="btn film-card__button">
                     Add review
                   </Link>
                 )}

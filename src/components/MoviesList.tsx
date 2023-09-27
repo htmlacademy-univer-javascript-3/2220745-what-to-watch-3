@@ -11,7 +11,6 @@ type MoviesListPops = {
 export default function MoviesList({ films, filmsCount }: MoviesListPops) {
   const [activeFilm, setActiveFilm] = useState<string | null>(null);
   let timer: undefined | TimeoutId = undefined;
-  console.log(films, filmsCount);
   const handleFilmFocus = (id: string) => {
     timer = setTimeout(() => {
       setActiveFilm(id);

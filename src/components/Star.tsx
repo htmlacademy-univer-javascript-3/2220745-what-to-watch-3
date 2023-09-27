@@ -1,8 +1,11 @@
+import { ChangeEventHandler } from 'react';
+
 type StarProps = {
   value: number;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export default function Star({ value }: StarProps) {
+export default function Star({ value, onChange }: StarProps) {
   return (
     <>
       <input
@@ -11,6 +14,7 @@ export default function Star({ value }: StarProps) {
         type="radio"
         name="rating"
         value={value}
+        onChange={onChange}
       />
       <label className="rating__label" htmlFor={`star-${value}`}>
         Rating {value}

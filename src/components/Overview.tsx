@@ -30,7 +30,7 @@ export default function Overview({ filmCard }: OverviewProps) {
 
         <p className="film-card__starring">
           <strong>
-            Starring: {filmCard.starring.join(', ') + ' '}
+            Starring: {`${filmCard.starring.join(', ')} `}
             and other
           </strong>
         </p>
