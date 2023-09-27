@@ -145,7 +145,7 @@ export default function MainPage({ films, promoFilm }: MainPageProps) {
             </li>
           </ul>
 
-          <MoviesList films={films} />
+          <MoviesList films={films} filmsCount={8} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

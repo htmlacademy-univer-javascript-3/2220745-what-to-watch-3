@@ -6,6 +6,7 @@ import {
   Film,
   FilmCard,
   PromoFilm,
+  Comment,
 } from './const.ts';
 import SignIn from './pages/SignIn.tsx';
 import Player from './pages/Player.tsx';
@@ -15,11 +16,13 @@ import NotFound from './pages/NotFound.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import MyList from './pages/MyList.tsx';
 import { filmCard } from './mocks/filmCard.ts';
+import { comments } from './mocks/comments.ts';
 
 type AppProps = {
   promoFilm: PromoFilm;
   filmCard: FilmCard;
   films: Film[];
+  comments: Comment[];
 };
 
 export default function App({ films, promoFilm }: AppProps) {
@@ -42,7 +45,13 @@ export default function App({ films, promoFilm }: AppProps) {
         <Route path={AppRoute.Player} element={<Player film={filmCard} />} />
         <Route
           path={AppRoute.Film}
-          element={<MoviePage filmCard={filmCard} />}
+          element={
+            <MoviePage
+              filmCard={filmCard}
+              comments={comments}
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
+          }
         />
         <Route
           path={AppRoute.AddReview}

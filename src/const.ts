@@ -14,6 +14,20 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum TabType {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}
+
+export enum Grade {
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very good',
+  Awesome = 'Awesome',
+}
+
 export type Film = {
   id: string;
   name: string;
@@ -49,4 +63,12 @@ export type FilmCard = {
   genre: string;
   released: number;
   isFavorite: boolean;
+};
+
+export type Comment = {
+  id: string;
+  date: string;
+  user: string;
+  comment: string;
+  rating: number;
 };
