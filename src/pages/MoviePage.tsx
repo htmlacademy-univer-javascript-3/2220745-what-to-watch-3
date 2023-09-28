@@ -12,7 +12,6 @@ type MoviePageProps = {
 
 export default function MoviePage({
   filmCard,
-  comments,
   authorizationStatus,
 }: MoviePageProps) {
   return (
@@ -101,7 +100,7 @@ export default function MoviePage({
               />
             </div>
 
-            <Tabs filmCard={filmCard} comments={comments} />
+            <Tabs filmCard={filmCard} />
           </div>
         </div>
       </section>
