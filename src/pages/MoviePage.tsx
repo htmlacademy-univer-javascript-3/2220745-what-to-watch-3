@@ -1,4 +1,4 @@
-import { AuthorizationStatus, Comment, FilmCard } from '../const.ts';
+import { AuthorizationStatus, FilmCard } from '../const.ts';
 import { Link } from 'react-router-dom';
 import Tabs from '../components/Tabs.tsx';
 import { films } from '../mocks/films.ts';
@@ -6,7 +6,6 @@ import MoviesList from '../components/MoviesList.tsx';
 
 type MoviePageProps = {
   filmCard: FilmCard;
-  comments: Comment[];
   authorizationStatus: AuthorizationStatus;
 };
 
