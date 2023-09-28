@@ -9,7 +9,6 @@ import NotFound from './pages/NotFound.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import MyList from './pages/MyList.tsx';
 import { filmCard } from './mocks/filmCard.ts';
-import { comments } from './mocks/comments.ts';
 
 type AppProps = {
   films: Film[];
@@ -39,7 +38,6 @@ export default function App({ films, promoFilm }: AppProps) {
           element={
             <MoviePage
               filmCard={filmCard}
-              comments={comments}
               authorizationStatus={AuthorizationStatus.Auth}
             />
           }
