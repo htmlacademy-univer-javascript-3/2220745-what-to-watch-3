@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 export default function GenresList() {
   const { films, genres } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     const newGenres = new Set<Genre>(['All genres']);
     films.forEach((film) => newGenres.add(film.genre));
