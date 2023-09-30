@@ -28,6 +28,8 @@ export enum Grade {
   Awesome = 'Awesome',
 }
 
+export type Genre = string;
+
 export type Film = {
   id: string;
   name: string;

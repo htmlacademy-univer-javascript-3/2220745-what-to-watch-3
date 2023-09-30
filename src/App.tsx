@@ -21,7 +21,7 @@ export default function App({ films, promoFilm }: AppProps) {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage films={films} promoFilm={promoFilm} />}
+          element={<MainPage promoFilm={promoFilm} />}
         />
         <Route path={AppRoute.SignIn} element={<SignIn />} />
         <Route
