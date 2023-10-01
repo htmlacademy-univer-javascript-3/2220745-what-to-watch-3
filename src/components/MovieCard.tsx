@@ -25,7 +25,7 @@ export default function MovieCard({
         <VideoPlayer film={film} activeFilm={activeFilm} />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`films/${film.id}`}>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>
           {film.name}
         </Link>
       </h3>
