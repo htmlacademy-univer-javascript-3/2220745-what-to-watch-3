@@ -74,3 +74,6 @@ export type Comment = {
   comment: string;
   rating: number;
 };
+
+export const SHOW_FILMS_COUNT = 8;
+export const MORE_LIKE_FILMS_COUNT = 4;

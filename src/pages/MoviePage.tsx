@@ -1,8 +1,15 @@
-import { AuthorizationStatus, FilmCard } from '../const.ts';
+import {
+  AuthorizationStatus,
+  FilmCard,
+  MORE_LIKE_FILMS_COUNT,
+} from '../const.ts';
 import { Link } from 'react-router-dom';
 import Tabs from '../components/Tabs.tsx';
 import { films } from '../mocks/films.ts';
 import MoviesList from '../components/MoviesList.tsx';
+import Logo from '../components/Logo.tsx';
+import Footer from '../components/Footer.tsx';
+import UserBlock from '../components/UserBlock.tsx';
 
 type MoviePageProps = {
   filmCard: FilmCard;
@@ -24,29 +31,9 @@ export default function MoviePage({
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+            <Logo />
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img
-                    src="img/avatar.jpg"
-                    alt="User avatar"
-                    width="63"
-                    height="63"
-                  />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
@@ -107,22 +94,10 @@ export default function MoviePage({
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MoviesList films={films} filmsCount={4} />
+          <MoviesList films={films} filmsCount={MORE_LIKE_FILMS_COUNT} />
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
