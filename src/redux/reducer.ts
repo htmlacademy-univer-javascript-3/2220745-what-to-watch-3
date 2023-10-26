@@ -6,12 +6,12 @@ import {
   setActiveGenre,
   setGenres,
 } from './action.ts';
-import { Film, Genre, PromoFilm, SHOW_FILMS_COUNT } from '../const.ts';
+import { Film, Genre, PromoFilmType, SHOW_FILMS_COUNT } from '../const.ts';
 
 type initialStateProps = {
   films: Film[];
   filmsByGenre: Film[];
-  promoFilm: PromoFilm | null;
+  promoFilm: PromoFilmType | null;
   genres: Genre[];
   activeGenre: Genre;
   filmsCount: number;

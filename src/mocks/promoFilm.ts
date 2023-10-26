@@ -1,6 +1,6 @@
-import { PromoFilm } from '../const.ts';
+import { PromoFilmType } from '../const.ts';
 
-export const promoFilm: PromoFilm = {
+export const promoFilm: PromoFilmType = {
   id: '36b6dce1-ec9b-4b1e-8002-32b737c7da29',
   name: 'Fantastic Beasts: The Crimes of Grindelwald',
   posterImage:

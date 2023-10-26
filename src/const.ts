@@ -56,7 +56,7 @@ export type Film = {
   genre: string;
 };
 
-export type PromoFilm = {
+export type PromoFilmType = {
   id: string;
   name: string;
   posterImage: string;

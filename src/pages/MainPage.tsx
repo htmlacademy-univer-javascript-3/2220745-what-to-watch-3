@@ -12,7 +12,7 @@ export default function MainPage() {
   const promoFilm = useAppSelector((state) => state.promoFilm);
   return (
     <>
-      {promoFilm && <PromoFilm />}
+      {promoFilm && <PromoFilm promoFilm={promoFilm} />}
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

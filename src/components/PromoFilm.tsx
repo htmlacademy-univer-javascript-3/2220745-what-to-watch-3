@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks.ts';
 import Logo from './Logo.tsx';
 import UserBlock from './UserBlock.tsx';
+import { PromoFilmType } from '../const.ts';
 
-export default function PromoFilm() {
+type PromoFilmProps = {
+  promoFilm: PromoFilmType;
+};
+
+export default function PromoFilm({ promoFilm }: PromoFilmProps) {
   const films = useAppSelector((state) => state.films);
-  const promo = useAppSelector((state) => state.promoFilm);
-  if (!promo) {
-    return;
-  }
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={promo?.backgroundImage} alt={promo?.name} />
+        <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -26,23 +27,23 @@ export default function PromoFilm() {
         <div className="film-card__info">
           <div className="film-card__poster">
             <img
-              src={promo?.posterImage}
-              alt={promo?.name}
+              src={promoFilm.posterImage}
+              alt={promoFilm.name}
               width="218"
               height="327"
             />
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{promo?.name}</h2>
+            <h2 className="film-card__title">{promoFilm.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{promo?.genre}</span>
-              <span className="film-card__year">{promo?.released}</span>
+              <span className="film-card__genre">{promoFilm.genre}</span>
+              <span className="film-card__year">{promoFilm.released}</span>
             </p>
 
             <div className="film-card__buttons">
               <Link
-                to={`player/${promo?.id}`}
+                to={`player/${promoFilm.id}`}
                 className="btn btn--play film-card__button"
                 type="button"
               >
@@ -56,7 +57,7 @@ export default function PromoFilm() {
                   <use xlinkHref="#add"></use>
                 </svg>
                 <span>My list</span>
-                <span className="film-card__count">{films?.length}</span>
+                <span className="film-card__count">{films.length}</span>
               </button>
             </div>
           </div>
