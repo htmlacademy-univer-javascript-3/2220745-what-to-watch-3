@@ -9,7 +9,7 @@
 * `player.html` — страница «Player» (Страница просмотра фильма):
    * `player-pause.html` — с остановкой видео;
 * `movie-page.html` — страница «Film» (Страница c описанием фильма):
-   * `movie-page-reviews.html` — с отзывами;
+   * `movie-page-comments.html` — с отзывами;
    * `movie-page-in-list.html` — с общей информацией;
    * `movie-page-details.html` — с расширенной информацией;
 * `add-review.html` — страница «Add review» (Добавление отзыва);

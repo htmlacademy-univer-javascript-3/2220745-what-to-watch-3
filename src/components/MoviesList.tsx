@@ -1,14 +1,14 @@
-import { Film } from '../const.ts';
 import MovieCard from './MovieCard.tsx';
 import { useState } from 'react';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
+import { Film } from '../const.ts';
 
-type MoviesListPops = {
+type MoviesListProps = {
   films: Film[];
   filmsCount: number;
 };
 
-export default function MoviesList({ films, filmsCount }: MoviesListPops) {
+export default function MoviesList({ films, filmsCount }: MoviesListProps) {
   const [activeFilm, setActiveFilm] = useState<string | null>(null);
   let timer: undefined | TimeoutId = undefined;
   const handleFilmFocus = (id: string) => {
@@ -24,17 +24,15 @@ export default function MoviesList({ films, filmsCount }: MoviesListPops) {
 
   return (
     <div className="catalog__films-list">
-      {films
-        .slice(0, filmsCount > films.length ? films.length : filmsCount)
-        .map((film) => (
-          <MovieCard
-            film={film}
-            onMouseOver={handleFilmFocus}
-            onMouseOut={handleFilmOut}
-            activeFilm={activeFilm}
-            key={film.id}
-          />
-        ))}
+      {films.slice(0, filmsCount).map((film) => (
+        <MovieCard
+          film={film}
+          onMouseOver={handleFilmFocus}
+          onMouseOut={handleFilmOut}
+          activeFilm={activeFilm}
+          key={film.id}
+        />
+      ))}
     </div>
   );
 }
