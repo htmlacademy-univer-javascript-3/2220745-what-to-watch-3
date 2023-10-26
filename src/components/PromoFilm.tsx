@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks.ts';
 import Logo from './Logo.tsx';
 import UserBlock from './UserBlock.tsx';
+import { PromoFilmType } from '../const.ts';
 
-export default function PromoFilm() {
-  const { promoFilm, films } = useAppSelector((state) => state);
+type PromoFilmProps = {
+  promoFilm: PromoFilmType;
+};
+
+export default function PromoFilm({ promoFilm }: PromoFilmProps) {
+  const films = useAppSelector((state) => state.films);
   return (
     <section className="film-card">
       <div className="film-card__bg">

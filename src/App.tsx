@@ -23,7 +23,7 @@ export default function App({ films }: AppProps) {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute>
               <MyList films={films} />
             </PrivateRoute>
           }

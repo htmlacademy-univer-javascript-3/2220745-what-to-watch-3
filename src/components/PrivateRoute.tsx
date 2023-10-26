@@ -3,12 +3,11 @@ import { Navigate } from 'react-router-dom';
 import React from 'react';
 
 type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
   children: React.ReactElement;
 };
 
-export default function PrivateRoute(props: PrivateRouteProps) {
-  const { authorizationStatus, children } = props;
+export default function PrivateRoute({ children }: PrivateRouteProps) {
+  const authorizationStatus = AuthorizationStatus.Auth;
   return authorizationStatus === AuthorizationStatus.Auth ? (
     children
   ) : (

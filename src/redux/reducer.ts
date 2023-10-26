@@ -1,25 +1,26 @@
-import { films } from '../mocks/films.ts';
 import { createReducer } from '@reduxjs/toolkit';
 import {
   addShowedFilms,
-  filmsByGenre,
+  loadFilms,
+  loadPromoFilm,
   setActiveGenre,
   setGenres,
 } from './action.ts';
-import { Film, Genre, PromoFilm, SHOW_FILMS_COUNT } from '../const.ts';
-import { promoFilm } from '../mocks/promoFilm.ts';
+import { Film, Genre, PromoFilmType, SHOW_FILMS_COUNT } from '../const.ts';
 
 type initialStateProps = {
   films: Film[];
-  promoFilm: PromoFilm;
+  filmsByGenre: Film[];
+  promoFilm: PromoFilmType | null;
   genres: Genre[];
   activeGenre: Genre;
   filmsCount: number;
 };
 
 const initialState: initialStateProps = {
-  films: films,
-  promoFilm: promoFilm,
+  films: [],
+  filmsByGenre: [],
+  promoFilm: null,
   genres: [],
   activeGenre: 'All genres',
   filmsCount: SHOW_FILMS_COUNT,
@@ -29,23 +30,34 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveGenre, (state, action) => {
       state.activeGenre = action.payload;
-      state.filmsCount = SHOW_FILMS_COUNT;
-    })
-    .addCase(filmsByGenre, (state) => {
+
       if (state.activeGenre === 'All genres') {
-        state.films = films;
+        state.filmsByGenre = state.films;
       } else {
-        state.films = films.filter((film) => film.genre === state.activeGenre);
+        state.filmsByGenre = state.films.filter(
+          (film) => film.genre === state.activeGenre
+        );
       }
+      state.filmsCount =
+        state.filmsByGenre.length > SHOW_FILMS_COUNT
+          ? SHOW_FILMS_COUNT
+          : state.filmsByGenre.length;
     })
     .addCase(setGenres, (state, action) => {
       state.genres = action.payload;
     })
     .addCase(addShowedFilms, (state) => {
-      state.filmsCount +=
-        state.films.length > state.filmsCount + SHOW_FILMS_COUNT
+      state.filmsCount =
+        state.filmsByGenre.length > state.filmsCount + SHOW_FILMS_COUNT
           ? state.filmsCount + SHOW_FILMS_COUNT
-          : state.films.length;
+          : state.filmsByGenre.length;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.filmsByGenre = action.payload;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
     });
 });
 

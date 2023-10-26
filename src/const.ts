@@ -28,6 +28,24 @@ export enum Grade {
   Awesome = 'Awesome',
 }
 
+export enum FilmStatus {
+  Vied = 0,
+  ToView = 1,
+}
+
+export const ApiRoute = {
+  Films: () => '/films',
+  Film: (filmId: string) => `/films/${filmId}`,
+  Similar: (filmId: string) => `/films/${filmId}/similar`,
+  Promo: () => '/promo',
+  Favorite: () => '/favorite',
+  SetFilmStatus: (filmId: string, status: FilmStatus) =>
+    `/favorite/${filmId}/${status}`,
+  Comments: (filmId: string) => `/comments/${filmId}`,
+  Login: () => '/login',
+  Logout: () => '/logout',
+};
+
 export type Genre = string;
 
 export type Film = {
@@ -38,7 +56,7 @@ export type Film = {
   genre: string;
 };
 
-export type PromoFilm = {
+export type PromoFilmType = {
   id: string;
   name: string;
   posterImage: string;
