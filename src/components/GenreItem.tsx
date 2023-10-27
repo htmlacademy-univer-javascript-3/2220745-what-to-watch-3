@@ -1,7 +1,8 @@
 import { useAppSelector } from '../redux/hooks.ts';
+import { Genre } from '../types.ts';
 
 type GenreItemProps = {
-  genre: string;
+  genre: Genre;
   onClick: (genre: string) => void;
 };
 

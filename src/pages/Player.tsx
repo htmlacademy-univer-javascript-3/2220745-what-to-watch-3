@@ -1,8 +1,8 @@
-import { FilmCard } from '../const.ts';
 import { Link } from 'react-router-dom';
+import { FilmCardType } from '../types.ts';
 
 type PlayerProps = {
-  film: FilmCard;
+  film: FilmCardType;
 };
 
 export default function Player({ film }: PlayerProps) {

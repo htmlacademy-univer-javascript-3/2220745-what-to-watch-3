@@ -1,8 +1,8 @@
-import { Comment } from '../const.ts';
 import { getFormattedDate, getFormattedRating } from '../utils.ts';
+import { CommentType } from '../types.ts';
 
 type ReviewProps = {
-  comment: Comment;
+  comment: CommentType;
 };
 
 export default function UserReview({ comment }: ReviewProps) {

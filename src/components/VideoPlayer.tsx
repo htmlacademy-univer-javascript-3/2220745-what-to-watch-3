@@ -1,8 +1,8 @@
-import { Film } from '../const.ts';
 import { useEffect, useRef, useState } from 'react';
+import { FilmType } from '../types.ts';
 
 type VideoPlayerProps = {
-  film: Film;
+  film: FilmType;
   activeFilm: string | null;
 };
 

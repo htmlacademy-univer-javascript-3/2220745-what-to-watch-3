@@ -1,8 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../types.ts';
+import { AppDispatch, State } from './types.ts';
 import { AxiosInstance } from 'axios';
-import { ApiRoute, Film, PromoFilmType } from '../const.ts';
-import { loadFilms, loadPromoFilm } from './action.ts';
+import { ApiRoute, AuthorizationStatus } from '../const.ts';
+import {
+  loadFilms,
+  loadPromoFilm,
+  requireAuthorization,
+  setError,
+  setUserImage,
+} from './action.ts';
+import { UserFormValues } from '../pages/SignIn.tsx';
+import { AuthInfo, FilmType, PromoFilmType } from '../types.ts';
 
 export const fetchFilmsAction = createAsyncThunk<
   void,
@@ -13,8 +21,10 @@ export const fetchFilmsAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/fetchFilms', async (_arg, { dispatch, extra: api }) => {
-  const films = await api.get<Film[]>(ApiRoute.Films()).then((res) => res.data);
-  dispatch(loadFilms(films));
+  await api
+    .get<FilmType[]>(ApiRoute.Films())
+    .then((res) => dispatch(loadFilms(res.data)))
+    .catch((err) => dispatch(setError(err.message)));
 });
 
 export const fetchPromoFilmAction = createAsyncThunk<
@@ -26,8 +36,31 @@ export const fetchPromoFilmAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/fetchPromoFilm', async (_arg, { dispatch, extra: api }) => {
-  const film = await api
+  await api
     .get<PromoFilmType>(ApiRoute.Promo())
-    .then((res) => res.data);
-  dispatch(loadPromoFilm(film));
+    .then((res) => dispatch(loadPromoFilm(res.data)))
+    .catch((err) => dispatch(setError(err.message)));
+});
+
+export const login = createAsyncThunk<
+  void,
+  UserFormValues,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchPromoFilm', async (form, { dispatch, extra: api }) => {
+  await api
+    .post<UserFormValues, { data: AuthInfo }>(ApiRoute.Login(), form)
+    .then((res) => res.data)
+    .then((data) => {
+      dispatch(
+        requireAuthorization(
+          data ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth
+        )
+      );
+      dispatch(setUserImage(data.avatarUrl));
+    })
+    .catch((err) => dispatch(setError(err.message)));
 });

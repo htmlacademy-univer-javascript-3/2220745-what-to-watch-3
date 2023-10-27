@@ -1,7 +1,33 @@
 import Logo from '../components/Logo.tsx';
 import Footer from '../components/Footer.tsx';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { useAppDispatch } from '../redux/hooks.ts';
+import { login } from '../redux/api-actions.ts';
+import { useNavigate } from 'react-router-dom';
+
+export type UserFormValues = {
+  email: string;
+  password: string;
+};
 
 export default function SignIn() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<UserFormValues>({
+    email: '',
+    password: '',
+  });
+
+  const handleFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
+    const { name, value } = evt.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit: FormEventHandler = () => {
+    dispatch(login(formData));
+    navigate('/');
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -11,15 +37,16 @@ export default function SignIn() {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
-                name="user-email"
+                name="email"
                 id="user-email"
+                onChange={handleFieldChange}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -33,8 +60,9 @@ export default function SignIn() {
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
-                name="user-password"
+                name="password"
                 id="user-password"
+                onChange={handleFieldChange}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -45,7 +73,11 @@ export default function SignIn() {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">
+            <button
+              className="sign-in__btn"
+              type="button"
+              onClick={handleSubmit}
+            >
               Sign in
             </button>
           </div>

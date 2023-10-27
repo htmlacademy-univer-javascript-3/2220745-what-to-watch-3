@@ -1,10 +1,10 @@
 import MovieCard from './MovieCard.tsx';
 import { useState } from 'react';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { Film } from '../const.ts';
+import { FilmType } from '../types.ts';
 
 type MoviesListProps = {
-  films: Film[];
+  films: FilmType[];
   filmsCount: number;
 };
 

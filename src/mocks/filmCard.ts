@@ -1,6 +1,6 @@
-import { FilmCard } from '../const.ts';
+import { FilmCardType } from '../types.ts';
 
-export const filmCard: FilmCard = {
+export const filmCard: FilmCardType = {
   id: '36b6dce1-ec9b-4b1e-8002-32b737c7da29',
   name: 'Fantastic Beasts: The Crimes of Grindelwald',
   posterImage:
