@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from './types.ts';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute, AuthorizationStatus } from '../const.ts';
 import {
   loadFilms,
@@ -24,7 +24,7 @@ export const fetchFilmsAction = createAsyncThunk<
   await api
     .get<FilmType[]>(ApiRoute.Films())
     .then((res) => dispatch(loadFilms(res.data)))
-    .catch((err) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => dispatch(setError(err.message)));
 });
 
 export const fetchPromoFilmAction = createAsyncThunk<
@@ -39,7 +39,7 @@ export const fetchPromoFilmAction = createAsyncThunk<
   await api
     .get<PromoFilmType>(ApiRoute.Promo())
     .then((res) => dispatch(loadPromoFilm(res.data)))
-    .catch((err) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => dispatch(setError(err.message)));
 });
 
 export const login = createAsyncThunk<
@@ -62,5 +62,5 @@ export const login = createAsyncThunk<
       );
       dispatch(setUserImage(data.avatarUrl));
     })
-    .catch((err) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => dispatch(setError(err.message)));
 });
