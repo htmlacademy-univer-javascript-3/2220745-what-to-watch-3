@@ -1,9 +1,9 @@
-import { Film } from '../const.ts';
 import { Link } from 'react-router-dom';
 import VideoPlayer from './VideoPlayer.tsx';
+import { FilmType } from '../types.ts';
 
 type MovieCardProps = {
-  film: Film;
+  film: FilmType;
   activeFilm: string | null;
   onMouseOver: (id: string) => void;
   onMouseOut: () => void;

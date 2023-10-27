@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../redux/hooks.ts';
 import { setActiveGenre, setGenres } from '../redux/action.ts';
-import { Genre } from '../const.ts';
 import GenreItem from './GenreItem.tsx';
 import { useEffect } from 'react';
+import { Genre } from '../types.ts';
 
 export default function GenresList() {
   const genres = useAppSelector((state) => state.genres);

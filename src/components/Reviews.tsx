@@ -1,8 +1,8 @@
-import { Comment } from '../const.ts';
 import UserReview from './Review.tsx';
+import { CommentType } from '../types.ts';
 
 type ReviewsProps = {
-  comments: Comment[];
+  comments: CommentType[];
 };
 
 export default function Reviews({ comments }: ReviewsProps) {

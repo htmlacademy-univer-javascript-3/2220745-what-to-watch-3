@@ -1,11 +1,11 @@
-import { FilmCard } from '../const.ts';
 import { Link } from 'react-router-dom';
 import ReviewForm from '../components/ReviewForm.tsx';
 import Logo from '../components/Logo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
+import { FilmCardType } from '../types.ts';
 
 type AddReviewProps = {
-  film: FilmCard;
+  film: FilmCardType;
 };
 
 export default function AddReview({ film }: AddReviewProps) {

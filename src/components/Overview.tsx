@@ -1,8 +1,8 @@
-import { FilmCard } from '../const.ts';
 import { getFilmGrade, getFormattedRating } from '../utils.ts';
+import { FilmCardType } from '../types.ts';
 
 type OverviewProps = {
-  filmCard: FilmCard;
+  filmCard: FilmCardType;
 };
 
 export default function Overview({ filmCard }: OverviewProps) {

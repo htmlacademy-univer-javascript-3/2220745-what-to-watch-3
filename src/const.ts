@@ -46,52 +46,6 @@ export const ApiRoute = {
   Logout: () => '/logout',
 };
 
-export type Genre = string;
-
-export type Film = {
-  id: string;
-  name: string;
-  previewImage: string;
-  previewVideoLink: string;
-  genre: string;
-};
-
-export type PromoFilmType = {
-  id: string;
-  name: string;
-  posterImage: string;
-  backgroundImage: string;
-  videoLink: string;
-  genre: string;
-  released: number;
-  isFavorite: boolean;
-};
-
-export type FilmCard = {
-  id: string;
-  name: string;
-  posterImage: string;
-  backgroundImage: string;
-  backgroundColor: string;
-  videoLink: string;
-  description: string;
-  rating: number;
-  scoresCount: number;
-  director: string;
-  starring: string[];
-  runTime: number;
-  genre: string;
-  released: number;
-  isFavorite: boolean;
-};
-
-export type Comment = {
-  id: string;
-  date: string;
-  user: string;
-  comment: string;
-  rating: number;
-};
-
 export const SHOW_FILMS_COUNT = 8;
 export const MORE_LIKE_FILMS_COUNT = 4;
+export const TIMEOUT_SHOW_ERROR = 2000;

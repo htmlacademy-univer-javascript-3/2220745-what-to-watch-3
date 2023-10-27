@@ -1,8 +1,4 @@
-import {
-  AuthorizationStatus,
-  FilmCard,
-  MORE_LIKE_FILMS_COUNT,
-} from '../const.ts';
+import { AuthorizationStatus, MORE_LIKE_FILMS_COUNT } from '../const.ts';
 import { Link } from 'react-router-dom';
 import Tabs from '../components/Tabs.tsx';
 import { films } from '../mocks/films.ts';
@@ -10,9 +6,10 @@ import MoviesList from '../components/MoviesList.tsx';
 import Logo from '../components/Logo.tsx';
 import Footer from '../components/Footer.tsx';
 import UserBlock from '../components/UserBlock.tsx';
+import { FilmCardType } from '../types.ts';
 
 type MoviePageProps = {
-  filmCard: FilmCard;
+  filmCard: FilmCardType;
   authorizationStatus: AuthorizationStatus;
 };
 

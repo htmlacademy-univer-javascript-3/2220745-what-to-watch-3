@@ -1,8 +1,8 @@
-import { FilmCard } from '../const.ts';
 import { getFormattedTime } from '../utils.ts';
+import { FilmCardType } from '../types.ts';
 
 type DetailsProps = {
-  filmCard: FilmCard;
+  filmCard: FilmCardType;
 };
 
 export default function Details({ filmCard }: DetailsProps) {

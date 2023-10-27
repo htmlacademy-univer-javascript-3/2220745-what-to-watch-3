@@ -1,6 +1,6 @@
-import { Film } from '../const.ts';
+import { FilmType } from '../types.ts';
 
-export const films: Film[] = [
+export const films: FilmType[] = [
   {
     id: '230d04fa-9668-4351-9633-b8d18be04b99',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',

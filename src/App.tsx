@@ -1,6 +1,6 @@
 import MainPage from './pages/MainPage.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, Film } from './const.ts';
+import { AppRoute, AuthorizationStatus } from './const.ts';
 import SignIn from './pages/SignIn.tsx';
 import Player from './pages/Player.tsx';
 import MoviePage from './pages/MoviePage.tsx';
@@ -9,9 +9,10 @@ import NotFound from './pages/NotFound.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import MyList from './pages/MyList.tsx';
 import { filmCard } from './mocks/filmCard.ts';
+import { FilmType } from './types.ts';
 
 type AppProps = {
-  films: Film[];
+  films: FilmType[];
 };
 
 export default function App({ films }: AppProps) {

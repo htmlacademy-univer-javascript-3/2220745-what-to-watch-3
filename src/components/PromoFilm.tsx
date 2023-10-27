@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks.ts';
 import Logo from './Logo.tsx';
 import UserBlock from './UserBlock.tsx';
-import { PromoFilmType } from '../const.ts';
+import { PromoFilmType } from '../types.ts';
 
 type PromoFilmProps = {
   promoFilm: PromoFilmType;
