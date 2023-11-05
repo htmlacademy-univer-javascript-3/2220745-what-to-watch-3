@@ -1,3 +1,5 @@
+import { Genre } from './types.ts';
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -48,4 +50,10 @@ export const ApiRoute = {
 
 export const SHOW_FILMS_COUNT = 8;
 export const MORE_LIKE_FILMS_COUNT = 4;
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const ALL_GENRES: Genre = 'All genres';
+export const MAX_GENRES_COUNT = 9;
+export const SHOW_INTRO_DELAY = 1000;
+export const CommentLength = {
+  MIN: 50,
+  MAX: 400,
+};

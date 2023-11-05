@@ -1,24 +1,38 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  addShowedFilms,
+  addComment,
+  changeToViewStatus,
+  loadComments,
+  loadFilm,
   loadFilms,
+  loadMoreLikeThis,
+  loadMyList,
   loadPromoFilm,
-  setActiveGenre,
   requireAuthorization,
+  setActiveGenre,
+  setError,
   setGenres,
   setUserImage,
-  setError,
 } from './action.ts';
-import { AuthorizationStatus, SHOW_FILMS_COUNT } from '../const.ts';
-import { FilmType, Genre, PromoFilmType } from '../types.ts';
+import { ALL_GENRES, AuthorizationStatus, FilmStatus } from '../const.ts';
+import {
+  CommentType,
+  FilmCardType,
+  FilmType,
+  Genre,
+  PromoFilmType,
+} from '../types.ts';
+import { getToken } from '../services/token.ts';
 
 type initialStateProps = {
   films: FilmType[];
-  filmsByGenre: FilmType[];
+  filmCard: FilmCardType | null;
+  moreLikeThis: FilmType[];
+  comments: CommentType[];
+  myList: FilmType[];
   promoFilm: PromoFilmType | null;
   genres: Genre[];
   activeGenre: Genre;
-  filmsCount: number;
   authorizationStatus: AuthorizationStatus;
   userImage: string;
   error: string | null;
@@ -26,11 +40,13 @@ type initialStateProps = {
 
 const initialState: initialStateProps = {
   films: [],
-  filmsByGenre: [],
+  filmCard: null,
+  moreLikeThis: [],
+  comments: [],
+  myList: [],
   promoFilm: null,
   genres: [],
-  activeGenre: 'All genres',
-  filmsCount: SHOW_FILMS_COUNT,
+  activeGenre: ALL_GENRES,
   authorizationStatus: AuthorizationStatus.Unknown,
   userImage: '',
   error: null,
@@ -40,36 +56,52 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveGenre, (state, action) => {
       state.activeGenre = action.payload;
-
-      if (state.activeGenre === 'All genres') {
-        state.filmsByGenre = state.films;
-      } else {
-        state.filmsByGenre = state.films.filter(
-          (film) => film.genre === state.activeGenre
-        );
-      }
-      state.filmsCount =
-        state.filmsByGenre.length > SHOW_FILMS_COUNT
-          ? SHOW_FILMS_COUNT
-          : state.filmsByGenre.length;
     })
     .addCase(setGenres, (state, action) => {
       state.genres = action.payload;
     })
-    .addCase(addShowedFilms, (state) => {
-      state.filmsCount =
-        state.filmsByGenre.length > state.filmsCount + SHOW_FILMS_COUNT
-          ? state.filmsCount + SHOW_FILMS_COUNT
-          : state.filmsByGenre.length;
-    })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
-      state.filmsByGenre = action.payload;
+    })
+    .addCase(loadFilm, (state, action) => {
+      state.filmCard = action.payload;
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
     })
+    .addCase(loadMoreLikeThis, (state, action) => {
+      state.moreLikeThis = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(addComment, (state, action) => {
+      state.comments = [...state.comments, action.payload];
+    })
+    .addCase(loadMyList, (state, action) => {
+      state.myList = action.payload;
+    })
+    .addCase(changeToViewStatus, (state, action) => {
+      if (action.payload.filmStatus === FilmStatus.ToView) {
+        const film = state.films.find((film) => film.id === action.payload.id);
+        if (film) {
+          state.myList = [...state.myList, film];
+        }
+      } else {
+        const index = state.myList.findIndex(
+          (film) => film.id === action.payload.id
+        );
+        if (index) {
+          state.myList = [
+            ...state.myList.slice(0, index),
+            ...state.myList.slice(index + 1, state.myList.length),
+          ];
+        }
+      }
+    })
     .addCase(requireAuthorization, (state, action) => {
+      if (getToken()) {
+      }
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserImage, (state, action) => {
