@@ -42,7 +42,9 @@ export const login = createAsyncThunk<
       dispatch(setUserImage(data.avatarUrl));
       saveToken(data.token);
     })
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const logout = createAsyncThunk<
@@ -90,7 +92,9 @@ export const fetchFilmsAction = createAsyncThunk<
   await api
     .get<FilmType[]>(ApiRoute.Films())
     .then((res) => dispatch(loadFilms(res.data)))
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const fetchPromoFilmAction = createAsyncThunk<
@@ -105,7 +109,9 @@ export const fetchPromoFilmAction = createAsyncThunk<
   await api
     .get<PromoFilmType>(ApiRoute.Promo())
     .then((res) => dispatch(loadPromoFilm(res.data)))
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const fetchFilmAction = createAsyncThunk<
@@ -120,7 +126,9 @@ export const fetchFilmAction = createAsyncThunk<
   await api
     .get<FilmCardType>(ApiRoute.Film(id))
     .then((res) => dispatch(loadFilm(res.data)))
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const fetchMoreLikeThis = createAsyncThunk<
@@ -135,7 +143,9 @@ export const fetchMoreLikeThis = createAsyncThunk<
   await api
     .get<FilmType[]>(ApiRoute.Similar(id))
     .then((res) => dispatch(loadMoreLikeThis(res.data)))
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const fetchComments = createAsyncThunk<
@@ -150,7 +160,9 @@ export const fetchComments = createAsyncThunk<
   await api
     .get<CommentType[]>(ApiRoute.Comments(id))
     .then((res) => dispatch(loadComments(res.data)))
-    .catch((err: AxiosError) => dispatch(setError(err.message)));
+    .catch((err: AxiosError) => {
+      dispatch(setError(err.message));
+    });
 });
 
 export const sendComment = createAsyncThunk<

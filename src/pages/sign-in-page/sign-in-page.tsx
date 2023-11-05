@@ -20,11 +20,11 @@ export default function SignInPage() {
   });
   const [isValid, setIsValid] = useState(false);
 
-  const handleValidate = (formData: UserFormValues) => {
-    const isValid =
-      formData.email.match(/[a-zA-Z.]+@[a-zA-Z]+[.][a-zA-Z]{2,4}$/) &&
-      formData.password.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/);
-    setIsValid(!!isValid);
+  const handleValidate = (newFormData: UserFormValues) => {
+    const validated =
+      newFormData.email.match(/[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]{2,4}$/) &&
+      newFormData.password.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/);
+    setIsValid(!!validated);
   };
 
   const handleFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {

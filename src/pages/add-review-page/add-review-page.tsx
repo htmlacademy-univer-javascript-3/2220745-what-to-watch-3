@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import Logo from '../../components/logo/logo.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
@@ -6,25 +6,33 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { fetchFilmAction } from '../../redux/api-actions.ts';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { AppRoute, AuthorizationStatus } from '../../const.ts';
+import { useEffect } from 'react';
 
 export default function AddReviewPage() {
   const { id } = useParams();
-  if (!id) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  const filmCard = useAppSelector((state) => state.filmCard);
   const authorizationStatus = useAppSelector(
     (state) => state.authorizationStatus
   );
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilmAction(id));
+    }
+  }, [id]);
+
   if (authorizationStatus !== AuthorizationStatus.Auth) {
     navigate(AppRoute.SignIn);
   }
 
-  const filmCard = useAppSelector((state) => state.filmCard);
-  const dispatch = useAppDispatch();
+  if (!id) {
+    navigate(AppRoute.NotFound);
+  }
+
   if (!filmCard) {
-    dispatch(fetchFilmAction(id));
     return <Spinner />;
   }
 

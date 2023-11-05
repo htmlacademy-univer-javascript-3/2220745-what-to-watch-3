@@ -2,6 +2,7 @@
 
 .spinner-container
 {
+  background-color: #180202;
   z-index: 99;
   position: fixed;
   width: 100px;

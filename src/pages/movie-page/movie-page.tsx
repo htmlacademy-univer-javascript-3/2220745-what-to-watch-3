@@ -3,7 +3,7 @@ import {
   AuthorizationStatus,
   MORE_LIKE_FILMS_COUNT,
 } from '../../const.ts';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs.tsx';
 import MoviesList from '../../components/movies-list/movies-list.tsx';
 import Logo from '../../components/logo/logo.tsx';
@@ -22,13 +22,10 @@ import RemoveToMyListButton from '../../components/remove-from-my-list-button/re
 
 export default function MoviePage() {
   const { id } = useParams();
-  const error = useAppSelector((state) => state.error);
-
-  if (error || !id) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const error = useAppSelector((state) => state.error);
   const authorizationStatus = useAppSelector(
     (state) => state.authorizationStatus
   );
@@ -37,10 +34,16 @@ export default function MoviePage() {
   const myList = useAppSelector((state) => state.myList);
 
   useEffect(() => {
-    dispatch(fetchFilmAction(id));
-    dispatch(fetchMoreLikeThis(id));
-    dispatch(fetchComments(id));
+    if (id) {
+      dispatch(fetchFilmAction(id));
+      dispatch(fetchMoreLikeThis(id));
+      dispatch(fetchComments(id));
+    }
   }, [id]);
+
+  if (error || !id) {
+    navigate(AppRoute.NotFound);
+  }
 
   if (!filmCard || filmCard.id !== id) {
     return <Spinner />;

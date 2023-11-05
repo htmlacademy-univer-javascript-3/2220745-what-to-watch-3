@@ -22,7 +22,6 @@ import {
   Genre,
   PromoFilmType,
 } from '../types.ts';
-import { getToken } from '../services/token.ts';
 
 type initialStateProps = {
   films: FilmType[];
@@ -83,9 +82,11 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeToViewStatus, (state, action) => {
       if (action.payload.filmStatus === FilmStatus.ToView) {
-        const film = state.films.find((film) => film.id === action.payload.id);
-        if (film) {
-          state.myList = [...state.myList, film];
+        const addedFilm = state.films.find(
+          (film) => film.id === action.payload.id
+        );
+        if (addedFilm) {
+          state.myList = [...state.myList, addedFilm];
         }
       } else {
         const index = state.myList.findIndex(
@@ -100,8 +101,6 @@ const reducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(requireAuthorization, (state, action) => {
-      if (getToken()) {
-      }
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserImage, (state, action) => {

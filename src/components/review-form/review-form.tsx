@@ -21,7 +21,7 @@ export default function ReviewForm() {
     comment.length <= CommentLength.MAX;
 
   const handleRatingChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
-    setRating(parseInt(evt.target.value));
+    setRating(parseInt(evt.target.value, 10));
   };
 
   const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (
