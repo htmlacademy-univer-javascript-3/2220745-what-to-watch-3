@@ -36,7 +36,7 @@ export default function PlayerPage() {
       return;
     }
     playerElement.requestFullscreen();
-  }, []);
+  }, [isLoaded]);
 
   const getFilmDuration = () => {
     const playerElement = playerRef.current;
