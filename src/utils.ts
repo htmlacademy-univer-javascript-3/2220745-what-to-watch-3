@@ -13,6 +13,16 @@ const getFormattedDate = (date: string): string =>
     year: 'numeric',
   });
 
+const getTimeLeft = (timeLeft: number) => {
+  const hours = Math.floor(timeLeft / 60 / 60);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const seconds = Math.floor(timeLeft % 60);
+  if (hours) {
+    return `-${hours}:${minutes}:${seconds}`;
+  }
+  return `-${minutes}:${seconds}`;
+};
+
 const getFormattedRating = (rating: number) => rating.toFixed(1);
 
 const getFilmGrade = (rating: number): Grade => {
@@ -29,4 +39,10 @@ const getFilmGrade = (rating: number): Grade => {
   }
 };
 
-export { getFormattedTime, getFormattedDate, getFilmGrade, getFormattedRating };
+export {
+  getFormattedTime,
+  getFormattedDate,
+  getFilmGrade,
+  getFormattedRating,
+  getTimeLeft,
+};

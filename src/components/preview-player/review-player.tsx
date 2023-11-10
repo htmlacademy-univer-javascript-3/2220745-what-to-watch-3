@@ -6,7 +6,7 @@ type VideoPlayerProps = {
   activeFilm: string | null;
 };
 
-export default function VideoPlayer({ film, activeFilm }: VideoPlayerProps) {
+export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 

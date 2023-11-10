@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import VideoPlayer from '../video-player/video-player.tsx';
+import ReviewPlayer from '../preview-player/review-player.tsx';
 import { FilmType } from '../../types.ts';
 
 type MovieCardProps = {
@@ -22,7 +22,7 @@ export default function MovieCard({
       onMouseOut={() => onMouseOut()}
     >
       <div className="small-film-card__image">
-        <VideoPlayer film={film} activeFilm={activeFilm} />
+        <ReviewPlayer film={film} activeFilm={activeFilm} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${film.id}`}>
