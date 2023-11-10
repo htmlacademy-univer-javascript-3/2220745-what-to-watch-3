@@ -1,15 +1,17 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { AuthorizationStatus } from '../../const.ts';
 import { Link } from 'react-router-dom';
-import { logout } from '../../redux/api-actions.ts';
+import { logoutAction } from '../../redux/api-actions.ts';
+import {
+  getAuthorized,
+  getUserImage,
+} from '../../redux/user-slice/selectors.ts';
 
 export default function UserBlock() {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const userImage = useAppSelector((state) => state.userImage);
-  if (authorizationStatus !== AuthorizationStatus.Auth) {
+  const authorized = useAppSelector(getAuthorized);
+  const userImage = useAppSelector(getUserImage);
+
+  if (!authorized) {
     return (
       <div className="user-block">
         <Link to="/login" className="user-block__link">
@@ -20,7 +22,7 @@ export default function UserBlock() {
   }
 
   const handleSignOutClick = () => {
-    dispatch(logout());
+    dispatch(logoutAction());
   };
 
   return (

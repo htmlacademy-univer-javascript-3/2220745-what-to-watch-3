@@ -1,15 +1,16 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import './error-message.css';
-import { setError } from '../../redux/action.ts';
+import { getHasError } from '../../redux/films-slice/selectors.ts';
+import { dropError } from '../../redux/films-slice/films-slice.ts';
 
 export default function ErrorMessage() {
-  const error = useAppSelector((state) => state.error);
+  const hasError = useAppSelector(getHasError);
   const dispatch = useAppDispatch();
 
-  return error ? (
+  return hasError ? (
     <div className="error-message">
-      {error}
-      <button className="close-button" onClick={() => dispatch(setError(null))}>
+      Произошла ошибка. Пожалуйста, попробуйте позже
+      <button className="close-button" onClick={() => dispatch(dropError())}>
         Close
       </button>
     </div>

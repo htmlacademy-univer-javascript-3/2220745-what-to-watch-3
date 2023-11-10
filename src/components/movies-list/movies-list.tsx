@@ -6,7 +6,7 @@ import { SHOW_INTRO_DELAY } from '../../const.ts';
 
 type MoviesListProps = {
   films: FilmType[];
-  filmsCount: number | undefined;
+  filmsCount?: number;
 };
 
 export default function MoviesList({ films, filmsCount }: MoviesListProps) {
@@ -25,7 +25,7 @@ export default function MoviesList({ films, filmsCount }: MoviesListProps) {
 
   return (
     <div className="catalog__films-list">
-      {films.slice(0, filmsCount).map((film) => (
+      {films.slice(0, filmsCount || films.length).map((film) => (
         <MovieCard
           film={film}
           onMouseOver={handleFilmFocus}

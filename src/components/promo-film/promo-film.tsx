@@ -2,16 +2,17 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo.tsx';
 import UserBlock from '../user-block/user-block.tsx';
 import { PromoFilmType } from '../../types.ts';
-import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button.tsx';
-import RemoveToMyListButton from '../remove-from-my-list-button/remove-from-my-list-button.tsx';
+import MyListButton from '../my-list-button/my-list-button.tsx';
+import React from 'react';
 import { useAppSelector } from '../../redux/hooks.ts';
+import { getAuthorized } from '../../redux/user-slice/selectors.ts';
 
 type PromoFilmProps = {
   promoFilm: PromoFilmType;
 };
 
-export default function PromoFilm({ promoFilm }: PromoFilmProps) {
-  const myList = useAppSelector((state) => state.myList);
+function PromoFilm({ promoFilm }: PromoFilmProps) {
+  const authorized = useAppSelector(getAuthorized);
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -54,11 +55,7 @@ export default function PromoFilm({ promoFilm }: PromoFilmProps) {
                 </svg>
                 <span>Play</span>
               </Link>
-              {myList.findIndex((film) => film.id === promoFilm.id) === -1 ? (
-                <AddToMyListButton filmId={promoFilm.id} />
-              ) : (
-                <RemoveToMyListButton filmId={promoFilm.id} />
-              )}
+              {authorized && <MyListButton filmCard={promoFilm} />}
             </div>
           </div>
         </div>
@@ -66,3 +63,5 @@ export default function PromoFilm({ promoFilm }: PromoFilmProps) {
     </section>
   );
 }
+
+export default React.memo(PromoFilm);

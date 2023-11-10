@@ -1,19 +1,19 @@
 import Rating from '../rating/rating.tsx';
 import { ChangeEventHandler, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
+import { useAppDispatch } from '../../redux/hooks.ts';
 import { sendComment } from '../../redux/api-actions.ts';
 import { CommentLength } from '../../const.ts';
+import { useNavigate } from 'react-router-dom';
 
-export type CommentFormValues = {
-  rating: number;
-  comment: string;
+export type ReviewFormProps = {
+  id: string;
 };
 
-export default function ReviewForm() {
-  const filmCard = useAppSelector((state) => state.filmCard);
+export default function ReviewForm({ id }: ReviewFormProps) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const validate = () =>
     rating !== 0 &&
@@ -25,15 +25,14 @@ export default function ReviewForm() {
   };
 
   const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (
-    evt
+    evt,
   ) => {
     setComment(evt.target.value);
   };
 
   const handleSubmit = () => {
-    if (filmCard?.id) {
-      dispatch(sendComment({ comment, rating, id: filmCard.id }));
-    }
+    dispatch(sendComment({ comment, rating, id }));
+    navigate(`/films/${id}`);
   };
 
   return (

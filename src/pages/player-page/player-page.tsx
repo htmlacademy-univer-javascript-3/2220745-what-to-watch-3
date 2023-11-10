@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks.ts';
-import Spinner from '../../components/spinner/spinner.tsx';
+import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 
 export default function PlayerPage() {
-  const film = useAppSelector((state) => state.filmCard);
+  const film = useAppSelector(getFilmCard);
   if (!film) {
-    return <Spinner />;
+    return null;
   }
 
   return (

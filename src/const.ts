@@ -48,6 +48,11 @@ export const ApiRoute = {
   Logout: () => '/logout',
 };
 
+export const NameSpace = {
+  Films: 'Films',
+  User: 'User',
+};
+
 export const SHOW_FILMS_COUNT = 8;
 export const MORE_LIKE_FILMS_COUNT = 4;
 export const ALL_GENRES: Genre = 'All genres';

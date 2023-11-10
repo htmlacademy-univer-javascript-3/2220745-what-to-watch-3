@@ -1,8 +1,9 @@
 import UserReview from './review.tsx';
 import { useAppSelector } from '../../redux/hooks.ts';
+import { getComments } from '../../redux/films-slice/selectors.ts';
 
 export default function Reviews() {
-  const comments = useAppSelector((state) => state.comments);
+  const comments = useAppSelector(getComments);
   return (
     <div className="film-card__reviews-col">
       {comments.map((comment) => (

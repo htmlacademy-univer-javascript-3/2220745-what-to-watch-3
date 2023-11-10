@@ -1,4 +1,5 @@
 export type Genre = string;
+export type ImageUrl = string;
 
 export type FilmType = {
   id: string;
@@ -36,6 +37,8 @@ export type FilmCardType = {
   released: number;
   isFavorite: boolean;
 };
+
+export type FavouriteFilmType = FilmType & FilmCardType;
 
 export type CommentType = {
   id: string;
