@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks.ts';
-import { login } from '../../redux/api-actions.ts';
+import { loginAction } from '../../redux/api-actions.ts';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
 
@@ -39,7 +39,7 @@ export default function SignInPage() {
 
   const handleSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
-    dispatch(login(formData));
+    dispatch(loginAction(formData));
     navigate(AppRoute.Main);
   };
 

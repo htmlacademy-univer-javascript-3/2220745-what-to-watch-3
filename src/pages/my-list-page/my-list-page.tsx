@@ -2,17 +2,12 @@ import MoviesList from '../../components/movies-list/movies-list.tsx';
 import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { useEffect } from 'react';
-import { fetchMyList } from '../../redux/api-actions.ts';
+import { useAppSelector } from '../../redux/hooks.ts';
+import { getMyList } from '../../redux/films-slice/selectors.ts';
 
 export default function MyListPage() {
-  const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.myList);
+  const films = useAppSelector(getMyList);
 
-  useEffect(() => {
-    dispatch(fetchMyList());
-  }, []);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -26,7 +21,7 @@ export default function MyListPage() {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MoviesList films={films} filmsCount={8} />
+        <MoviesList films={films} />
       </section>
 
       <Footer />

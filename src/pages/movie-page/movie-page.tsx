@@ -1,52 +1,36 @@
-import {
-  AppRoute,
-  AuthorizationStatus,
-  MORE_LIKE_FILMS_COUNT,
-} from '../../const.ts';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { MORE_LIKE_FILMS_COUNT } from '../../const.ts';
+import { Link, useParams } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs.tsx';
 import MoviesList from '../../components/movies-list/movies-list.tsx';
 import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import Spinner from '../../components/spinner/spinner.tsx';
 import { useEffect } from 'react';
+import { fetchFilmDataAction } from '../../redux/api-actions.ts';
+import MyListButton from '../../components/my-list-button/my-list-button.tsx';
+import { getAuthorized } from '../../redux/user-slice/selectors.ts';
 import {
-  fetchComments,
-  fetchFilmAction,
-  fetchMoreLikeThis,
-} from '../../redux/api-actions.ts';
-import AddToMyListButton from '../../components/add-to-my-list-button/add-to-my-list-button.tsx';
-import RemoveToMyListButton from '../../components/remove-from-my-list-button/remove-from-my-list-button.tsx';
+  getFilmCard,
+  getMoreLikeThis,
+} from '../../redux/films-slice/selectors.ts';
 
 export default function MoviePage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  const error = useAppSelector((state) => state.error);
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const filmCard = useAppSelector((state) => state.filmCard);
-  const moreLikeThis = useAppSelector((state) => state.moreLikeThis);
-  const myList = useAppSelector((state) => state.myList);
+  const authorized = useAppSelector(getAuthorized);
+  const filmCard = useAppSelector(getFilmCard);
+  const moreLikeThis = useAppSelector(getMoreLikeThis);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchFilmAction(id));
-      dispatch(fetchMoreLikeThis(id));
-      dispatch(fetchComments(id));
+    if (id && id !== filmCard?.id) {
+      dispatch(fetchFilmDataAction(id));
     }
-  }, [id]);
+  }, []);
 
-  if (error || !id) {
-    navigate(AppRoute.NotFound);
-  }
-
-  if (!filmCard || filmCard.id !== id) {
-    return <Spinner />;
+  if (!filmCard) {
+    return null;
   }
 
   return (
@@ -84,15 +68,13 @@ export default function MoviePage() {
                   </svg>
                   <span>Play</span>
                 </Link>
-                {myList.findIndex((film) => film.id === filmCard.id) === -1 ? (
-                  <AddToMyListButton filmId={filmCard.id} />
-                ) : (
-                  <RemoveToMyListButton filmId={filmCard.id} />
-                )}
-                {authorizationStatus === AuthorizationStatus.Auth && (
-                  <Link to={'review'} className="btn film-card__button">
-                    Add review
-                  </Link>
+                {authorized && (
+                  <>
+                    <MyListButton filmCard={filmCard} />
+                    <Link to={'review'} className="btn film-card__button">
+                      Add review
+                    </Link>
+                  </>
                 )}
               </div>
             </div>

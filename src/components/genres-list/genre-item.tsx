@@ -1,13 +1,14 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { Genre } from '../../types.ts';
-import { setActiveGenre } from '../../redux/action.ts';
+import { getActiveGenre } from '../../redux/films-slice/selectors.ts';
+import { setActiveGenre } from '../../redux/films-slice/films-slice.ts';
 
 type GenreItemProps = {
   genre: Genre;
 };
 
 export default function GenreItem({ genre }: GenreItemProps) {
-  const activeGenre = useAppSelector((state) => state.activeGenre);
+  const activeGenre = useAppSelector(getActiveGenre);
   const dispatch = useAppDispatch();
 
   const handleGenreClick = () => {

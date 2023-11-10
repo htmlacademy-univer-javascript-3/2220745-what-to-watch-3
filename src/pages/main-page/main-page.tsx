@@ -8,11 +8,12 @@ import Spinner from '../../components/spinner/spinner.tsx';
 import { useState } from 'react';
 import { SHOW_FILMS_COUNT } from '../../const.ts';
 import { useFilmsByGenre } from '../../hooks.ts';
+import { getPromoFilm } from '../../redux/films-slice/selectors.ts';
 
 export default function MainPage() {
   const [filmsCount, setFilmsCount] = useState(SHOW_FILMS_COUNT);
   const films = useFilmsByGenre();
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   const handleShowMoreButtonClick = () =>
     setFilmsCount((prevState) => prevState + SHOW_FILMS_COUNT);
