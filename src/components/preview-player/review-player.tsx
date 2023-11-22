@@ -21,8 +21,7 @@ export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
     }
 
     playerElement.addEventListener('loadeddata', handleDataLoaded);
-    return () =>
-      playerElement.removeEventListener('loadeddata', handleDataLoaded);
+    return () => playerElement.removeEventListener('loadeddata', handleDataLoaded);
   }, []);
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
 
     playerElement.pause();
     playerElement.src = film.previewVideoLink;
-  }, [activeFilm]);
+  }, [activeFilm, film, isLoaded]);
 
   return (
     <video

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { setFilmStatus } from '../../redux/api-actions.ts';
+import { setFilmStatusAction } from '../../redux/api-actions.ts';
 import { FilmStatus } from '../../const.ts';
 import { getMyList } from '../../redux/films-slice/selectors.ts';
 
@@ -7,14 +7,12 @@ type AddToMyListButtonProps = {
   filmId: string;
 };
 
-export default function RemoveToMyListButton({
-  filmId,
-}: AddToMyListButtonProps) {
+export default function RemoveToMyListButton({ filmId }: AddToMyListButtonProps) {
   const myFilms = useAppSelector(getMyList);
   const dispatch = useAppDispatch();
 
   const handleRemoveButtonClick = () => {
-    dispatch(setFilmStatus({ id: filmId, filmStatus: FilmStatus.Vied }));
+    dispatch(setFilmStatusAction({ id: filmId, filmStatus: FilmStatus.Vied }));
   };
 
   return (

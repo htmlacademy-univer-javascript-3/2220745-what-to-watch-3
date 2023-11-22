@@ -1,7 +1,7 @@
 import Rating from '../rating/rating.tsx';
 import { ChangeEventHandler, useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks.ts';
-import { sendComment } from '../../redux/api-actions.ts';
+import { sendCommentAction } from '../../redux/api-actions.ts';
 import { CommentLength } from '../../const.ts';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,29 +16,25 @@ export default function ReviewForm({ id }: ReviewFormProps) {
   const navigate = useNavigate();
 
   const validate = () =>
-    rating !== 0 &&
-    comment.length >= CommentLength.MIN &&
-    comment.length <= CommentLength.MAX;
+    rating !== 0 && comment.length >= CommentLength.MIN && comment.length <= CommentLength.MAX;
 
   const handleRatingChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     setRating(parseInt(evt.target.value, 10));
   };
 
-  const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (
-    evt,
-  ) => {
+  const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
     setComment(evt.target.value);
   };
 
   const handleSubmit = () => {
-    dispatch(sendComment({ comment, rating, id }));
+    dispatch(sendCommentAction({ comment, rating, id }));
     navigate(`/films/${id}`);
   };
 
   return (
     <div className="add-review">
       <form action="#" className="add-review__form">
-        <Rating setRating={handleRatingChange} />
+        <Rating onChange={handleRatingChange} />
 
         <div className="add-review__text">
           <textarea

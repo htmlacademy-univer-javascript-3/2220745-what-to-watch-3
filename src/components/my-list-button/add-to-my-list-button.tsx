@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { setFilmStatus } from '../../redux/api-actions.ts';
+import { setFilmStatusAction } from '../../redux/api-actions.ts';
 import { FilmStatus } from '../../const.ts';
 import { getMyList } from '../../redux/films-slice/selectors.ts';
 
@@ -12,7 +12,7 @@ export default function AddToMyListButton({ filmId }: AddToMyListButtonProps) {
   const dispatch = useAppDispatch();
 
   const handleAddButtonClick = () => {
-    dispatch(setFilmStatus({ id: filmId, filmStatus: FilmStatus.ToView }));
+    dispatch(setFilmStatusAction({ id: filmId, filmStatus: FilmStatus.ToView }));
   };
 
   return (

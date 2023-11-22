@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
 import { useEffect } from 'react';
 import { getFilmCard } from '../../redux/films-slice/selectors.ts';
+import { Helmet } from 'react-helmet-async';
 
 export default function AddReviewPage() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function AddReviewPage() {
     if (id && id !== filmCard?.id) {
       dispatch(fetchFilmDataAction(id));
     }
-  }, [id]);
+  }, [id, filmCard, dispatch]);
 
   if (!filmCard) {
     return null;
@@ -24,6 +25,9 @@ export default function AddReviewPage() {
 
   return (
     <section className="film-card film-card--full">
+      <Helmet>
+        <title>{filmCard.name} | Новый отзыв</title>
+      </Helmet>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={filmCard.backgroundImage} alt={filmCard.name} />
@@ -51,12 +55,7 @@ export default function AddReviewPage() {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img
-            src={filmCard.posterImage}
-            alt={filmCard.name}
-            width="218"
-            height="327"
-          />
+          <img src={filmCard.posterImage} alt={filmCard.name} width="218" height="327" />
         </div>
       </div>
       <ReviewForm id={filmCard.id} />

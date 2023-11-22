@@ -1,6 +1,6 @@
-import { useAppSelector } from './redux/hooks.ts';
-import { ALL_GENRES } from './const.ts';
-import { getActiveGenre, getFilms } from './redux/films-slice/selectors.ts';
+import { useAppSelector } from '../redux/hooks.ts';
+import { ALL_GENRES } from '../const.ts';
+import { getActiveGenre, getFilms } from '../redux/films-slice/selectors.ts';
 
 export const useFilmsByGenre = () =>
   useAppSelector((state) => {

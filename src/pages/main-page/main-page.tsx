@@ -7,8 +7,9 @@ import Footer from '../../components/footer/footer.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { useState } from 'react';
 import { SHOW_FILMS_COUNT } from '../../const.ts';
-import { useFilmsByGenre } from '../../hooks.ts';
+import { useFilmsByGenre } from '../../hooks/use-films-by-genre.ts';
 import { getPromoFilm } from '../../redux/films-slice/selectors.ts';
+import { Helmet } from 'react-helmet-async';
 
 export default function MainPage() {
   const [filmsCount, setFilmsCount] = useState(SHOW_FILMS_COUNT);
@@ -20,6 +21,9 @@ export default function MainPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Главная</title>
+      </Helmet>
       {promoFilm && <PromoFilm promoFilm={promoFilm} />}
       <div className="page-content">
         <section className="catalog">
@@ -34,9 +38,7 @@ export default function MainPage() {
             <Spinner />
           )}
 
-          {filmsCount < films.length && (
-            <ShowMoreButton onClick={handleShowMoreButtonClick} />
-          )}
+          {filmsCount < films.length && <ShowMoreButton onClick={handleShowMoreButtonClick} />}
         </section>
         <Footer />
       </div>
