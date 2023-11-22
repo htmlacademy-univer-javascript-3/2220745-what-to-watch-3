@@ -1,24 +1,22 @@
-import { useAppDispatch } from '../../redux/hooks.ts';
-import { fetchFilmsAction } from '../../redux/api-actions.ts';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const.ts';
+import { Helmet } from 'react-helmet-async';
 
 function ErrorScreen() {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleTryAgain = () => {
-    dispatch(fetchFilmsAction());
+    navigate(AppRoute.Main);
   };
 
   return (
     <>
-      <p className="error__text">
-        Что-то пошло не так. Пожалуйста, попробуйте снова
-      </p>
-      <button
-        onClick={handleTryAgain}
-        className="replay replay--error"
-        type="button"
-      >
-        Попробовать ещё раз
+      <Helmet>
+        <title>404</title>
+      </Helmet>
+      <p className="error__text">404. Page not found</p>
+      <button onClick={handleTryAgain} className="replay replay--error" type="button">
+        Back to main page
       </button>
     </>
   );

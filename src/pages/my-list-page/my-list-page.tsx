@@ -4,12 +4,16 @@ import Footer from '../../components/footer/footer.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
 import { useAppSelector } from '../../redux/hooks.ts';
 import { getMyList } from '../../redux/films-slice/selectors.ts';
+import { Helmet } from 'react-helmet-async';
 
 export default function MyListPage() {
   const films = useAppSelector(getMyList);
 
   return (
     <div className="user-page">
+      <Helmet>
+        <title>Мои фильмы</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo />
 

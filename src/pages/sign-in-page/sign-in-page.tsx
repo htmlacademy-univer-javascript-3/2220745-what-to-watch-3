@@ -5,6 +5,8 @@ import { useAppDispatch } from '../../redux/hooks.ts';
 import { loginAction } from '../../redux/api-actions.ts';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
+import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 export type UserFormValues = {
   email: string;
@@ -18,33 +20,42 @@ export default function SignInPage() {
     email: '',
     password: '',
   });
-  const [isValid, setIsValid] = useState(false);
 
-  const handleValidate = (newFormData: UserFormValues) => {
-    const validated =
-      newFormData.email.match(/[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]{2,4}$/) &&
-      newFormData.password.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/);
-    setIsValid(!!validated);
-  };
+  const validateEmail = (newFormData: UserFormValues) =>
+    Boolean(newFormData.email.match(/[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]{2,4}$/));
+
+  const validatePassword = (newFormData: UserFormValues) =>
+    Boolean(newFormData.password.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/));
 
   const handleFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     const { name, value } = evt.target;
 
     setFormData(() => {
       const newFormData: UserFormValues = { ...formData, [name]: value };
-      handleValidate(newFormData);
       return newFormData;
     });
   };
 
   const handleSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
+    if (!validateEmail(formData)) {
+      toast.warn('Please enter a valid email address');
+      return;
+    }
+    if (!validatePassword(formData)) {
+      toast.warn('Please enter a valid password');
+      return;
+    }
+
     dispatch(loginAction(formData));
     navigate(AppRoute.Main);
   };
 
   return (
     <div className="user-page">
+      <Helmet>
+        <title>Вход</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo />
 
@@ -64,10 +75,7 @@ export default function SignInPage() {
                 onChange={handleFieldChange}
                 required
               />
-              <label
-                className="sign-in__label visually-hidden"
-                htmlFor="user-email"
-              >
+              <label className="sign-in__label visually-hidden" htmlFor="user-email">
                 Email address
               </label>
             </div>
@@ -81,10 +89,7 @@ export default function SignInPage() {
                 onChange={handleFieldChange}
                 required
               />
-              <label
-                className="sign-in__label visually-hidden"
-                htmlFor="user-password"
-              >
+              <label className="sign-in__label visually-hidden" htmlFor="user-password">
                 Password
               </label>
             </div>
@@ -95,7 +100,6 @@ export default function SignInPage() {
               type="submit"
               onSubmit={handleSubmit}
               onClick={handleSubmit}
-              disabled={!isValid}
             >
               Sign in
             </button>

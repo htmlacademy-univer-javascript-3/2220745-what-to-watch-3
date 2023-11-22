@@ -8,6 +8,7 @@ import PlayButton from '../../components/play-button/play-button.tsx';
 import ExitLink from '../../components/exit-link/exit-link.tsx';
 import ProgressBar from '../../components/progress-bar/progress-bar.tsx';
 import FullScreenButton from '../../components/full-screen-button/full-screen-button.tsx';
+import { Helmet } from 'react-helmet-async';
 
 export default function PlayerPage() {
   const { id } = useParams();
@@ -65,7 +66,7 @@ export default function PlayerPage() {
     } else {
       playerElement.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, isLoaded]);
 
   useEffect(() => {
     if (id && id !== film?.id) {
@@ -78,9 +79,8 @@ export default function PlayerPage() {
     }
 
     playerElement.addEventListener('loadeddata', handleDataLoaded);
-    return () =>
-      playerElement.removeEventListener('loadeddata', handleDataLoaded);
-  }, []);
+    return () => playerElement.removeEventListener('loadeddata', handleDataLoaded);
+  }, [isLoaded, dispatch, id, film]);
 
   if (!film) {
     return null;
@@ -88,6 +88,9 @@ export default function PlayerPage() {
 
   return (
     <div className="player">
+      <Helmet>
+        <title>{film.name} | Проигрыватель</title>
+      </Helmet>
       <video
         ref={playerRef}
         src={film.videoLink}
@@ -97,10 +100,7 @@ export default function PlayerPage() {
       <ExitLink />
 
       <div className="player__controls">
-        <ProgressBar
-          duration={getFilmDuration()}
-          currentTime={getFilmCurrentTime()}
-        />
+        <ProgressBar duration={getFilmDuration()} currentTime={getFilmCurrentTime()} />
 
         <div className="player__controls-row">
           {isPlaying ? (

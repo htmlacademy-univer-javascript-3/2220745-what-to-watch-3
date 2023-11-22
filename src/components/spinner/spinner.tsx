@@ -2,13 +2,8 @@ import './spinner.css';
 
 export default function Spinner() {
   return (
-    <div className="spinner-container">
-      <svg
-        width="100%"
-        viewBox="0 0 276 276"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div className="spinner-container" data-testid={'spinner'}>
+      <svg width="100%" viewBox="0 0 276 276" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="spinner">
           <circle
             id="upper"

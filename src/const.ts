@@ -41,17 +41,16 @@ export const ApiRoute = {
   Similar: (filmId: string) => `/films/${filmId}/similar`,
   Promo: () => '/promo',
   Favorite: () => '/favorite',
-  SetFilmStatus: (filmId: string, status: FilmStatus) =>
-    `/favorite/${filmId}/${status}`,
+  SetFilmStatus: (filmId: string, status: FilmStatus) => `/favorite/${filmId}/${status}`,
   Comments: (filmId: string) => `/comments/${filmId}`,
   Login: () => '/login',
   Logout: () => '/logout',
 };
 
-export const NameSpace = {
-  Films: 'Films',
-  User: 'User',
-};
+export enum NameSpace {
+  Films = 'Films',
+  User = 'User',
+}
 
 export const SHOW_FILMS_COUNT = 8;
 export const MORE_LIKE_FILMS_COUNT = 4;

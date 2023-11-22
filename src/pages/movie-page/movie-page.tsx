@@ -10,10 +10,8 @@ import { useEffect } from 'react';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
 import MyListButton from '../../components/my-list-button/my-list-button.tsx';
 import { getAuthorized } from '../../redux/user-slice/selectors.ts';
-import {
-  getFilmCard,
-  getMoreLikeThis,
-} from '../../redux/films-slice/selectors.ts';
+import { getFilmCard, getMoreLikeThis } from '../../redux/films-slice/selectors.ts';
+import { Helmet } from 'react-helmet-async';
 
 export default function MoviePage() {
   const { id } = useParams();
@@ -27,7 +25,7 @@ export default function MoviePage() {
     if (id && id !== filmCard?.id) {
       dispatch(fetchFilmDataAction(id));
     }
-  }, []);
+  }, [dispatch, id, filmCard?.id]);
 
   if (!filmCard) {
     return null;
@@ -36,6 +34,9 @@ export default function MoviePage() {
   return (
     <>
       <section className="film-card film-card--full">
+        <Helmet>
+          <title>{filmCard.name}</title>
+        </Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={filmCard.backgroundImage} alt={filmCard.name} />
@@ -84,12 +85,7 @@ export default function MoviePage() {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img
-                src={filmCard.posterImage}
-                alt={filmCard.name}
-                width="218"
-                height="327"
-              />
+              <img src={filmCard.posterImage} alt={filmCard.name} width="218" height="327" />
             </div>
 
             <Tabs filmCard={filmCard} />
@@ -101,10 +97,7 @@ export default function MoviePage() {
         {moreLikeThis.length !== 0 && (
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <MoviesList
-              films={moreLikeThis}
-              filmsCount={MORE_LIKE_FILMS_COUNT}
-            />
+            <MoviesList films={moreLikeThis} filmsCount={MORE_LIKE_FILMS_COUNT} />
           </section>
         )}
 

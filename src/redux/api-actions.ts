@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from './types.ts';
 import { AxiosInstance } from 'axios';
-import { ApiRoute, FilmStatus } from '../const.ts';
+import { ApiRoute, AppRoute, FilmStatus } from '../const.ts';
 import { UserFormValues } from '../pages/sign-in-page/sign-in-page.tsx';
 import {
   AuthInfo,
@@ -12,6 +12,7 @@ import {
   PromoFilmType,
 } from '../types.ts';
 import { removeToken, saveToken } from '../services/token.ts';
+import { redirectToRoute } from './action.ts';
 
 export const loginAction = createAsyncThunk<
   ImageUrl,
@@ -21,9 +22,10 @@ export const loginAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/login', async (form, { extra: api }) => {
+>('user/login', async (form, { dispatch, extra: api }) => {
   const { data } = await api.post<AuthInfo>(ApiRoute.Login(), form);
   saveToken(data.token);
+  dispatch(redirectToRoute(AppRoute.Main));
   return data.avatarUrl;
 });
 
@@ -48,7 +50,7 @@ export const checkAuthAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/checkAuthorization', async (_arg, { extra: api }) => {
+>('user/checkAuth', async (_arg, { extra: api }) => {
   const { data } = await api.get<AuthInfo>(ApiRoute.Login());
   return data.avatarUrl;
 });
@@ -88,16 +90,15 @@ export const fetchFilmDataAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/fetchFilmData', async (id, { extra: api }) => {
-  const [{ data: filmCard }, { data: comments }, { data: moreLikeThis }] =
-    await Promise.all([
-      api.get<FilmCardType>(ApiRoute.Film(id)),
-      api.get<CommentType[]>(ApiRoute.Comments(id)),
-      api.get<FilmType[]>(ApiRoute.Similar(id)),
-    ]);
+  const [{ data: filmCard }, { data: comments }, { data: moreLikeThis }] = await Promise.all([
+    api.get<FilmCardType>(ApiRoute.Film(id)),
+    api.get<CommentType[]>(ApiRoute.Comments(id)),
+    api.get<FilmType[]>(ApiRoute.Similar(id)),
+  ]);
   return { filmCard, comments, moreLikeThis };
 });
 
-export const sendComment = createAsyncThunk<
+export const sendCommentAction = createAsyncThunk<
   CommentType,
   { id: string; rating: number; comment: string },
   {
@@ -113,7 +114,7 @@ export const sendComment = createAsyncThunk<
   return data;
 });
 
-export const fetchMyList = createAsyncThunk<
+export const fetchMyListAction = createAsyncThunk<
   FilmType[],
   undefined,
   {
@@ -126,7 +127,7 @@ export const fetchMyList = createAsyncThunk<
   return data;
 });
 
-export const setFilmStatus = createAsyncThunk<
+export const setFilmStatusAction = createAsyncThunk<
   FilmCardType,
   { id: string; filmStatus: FilmStatus },
   {
@@ -135,8 +136,6 @@ export const setFilmStatus = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/setFilmStatus', async ({ id, filmStatus }, { extra: api }) => {
-  const { data } = await api.post<FilmCardType>(
-    ApiRoute.SetFilmStatus(id, filmStatus),
-  );
+  const { data } = await api.post<FilmCardType>(ApiRoute.SetFilmStatus(id, filmStatus));
   return data;
 });
