@@ -5,9 +5,9 @@ type ReviewProps = {
   comment: CommentType;
 };
 
-export default function UserReview({ comment }: ReviewProps) {
+export default function ReviewItem({ comment }: ReviewProps) {
   return (
-    <div className="review">
+    <div className="review" data-testid={'review'}>
       <blockquote className="review__quote">
         <p className="review__text">{comment.comment}</p>
 

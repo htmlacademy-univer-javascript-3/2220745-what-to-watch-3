@@ -43,6 +43,7 @@ export default function ReviewForm({ id }: ReviewFormProps) {
             name="comment"
             id="comment"
             placeholder="Review text"
+            data-testid="comment"
           />
           <div className="add-review__submit">
             <button

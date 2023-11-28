@@ -1,21 +1,30 @@
 import { TabType } from '../../const.ts';
-import Overview from './overview.tsx';
-import Details from './details.tsx';
-import Reviews from './reviews.tsx';
-import TabLink from './tab-link.tsx';
+import TabOverview from '../tab-overview/tab-overview.tsx';
+import TabDetails from '../tab-details/tab-details.tsx';
+import TabReviews from '../tab-reviews/tab-reviews.tsx';
+import TabLink from '../tab-link/tab-link.tsx';
 import { SyntheticEvent, useState } from 'react';
 import { FilmCardType } from '../../types.ts';
 
 type TabsProps = {
   filmCard: FilmCardType;
 };
+
+const getActiveTab = (tab: TabType, filmCard: FilmCardType) => {
+  switch (tab) {
+    case TabType.Details:
+      return <TabDetails filmCard={filmCard} />;
+    case TabType.Reviews:
+      return <TabReviews />;
+    default:
+    case TabType.Overview:
+      return <TabOverview filmCard={filmCard} />;
+  }
+};
+
 export default function Tabs({ filmCard }: TabsProps) {
   const [activeTab, setActiveTab] = useState(TabType.Overview);
-  const tabs = {
-    [TabType.Overview]: <Overview filmCard={filmCard} />,
-    [TabType.Details]: <Details filmCard={filmCard} />,
-    [TabType.Reviews]: <Reviews />,
-  };
+
   const handleTabChange = (evt: SyntheticEvent) => {
     const targetId = evt.currentTarget.id as TabType;
     if (targetId) {
@@ -47,7 +56,7 @@ export default function Tabs({ filmCard }: TabsProps) {
           />
         </ul>
       </nav>
-      {tabs[activeTab]}
+      {getActiveTab(activeTab, filmCard)}
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import PauseButton from './pause-button.tsx';
+import PlayPauseButton from './play-pause-button.tsx';
 
 describe('Component: PauseButton', () => {
   it('should render correct', () => {
     const onClick = vi.fn;
 
-    render(<PauseButton onClick={onClick} />);
+    render(<PlayPauseButton onClick={onClick} isPlaying />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
   });

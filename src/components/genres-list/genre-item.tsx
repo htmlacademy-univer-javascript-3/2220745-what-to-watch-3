@@ -1,26 +1,17 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { Genre } from '../../types.ts';
-import { getActiveGenre } from '../../redux/films-slice/selectors.ts';
-import { setActiveGenre } from '../../redux/films-slice/films-slice.ts';
+import cn from 'classnames';
 
 type GenreItemProps = {
   genre: Genre;
+  isActiveGenre: boolean;
+  onClick: (genre: Genre) => void;
 };
 
-export default function GenreItem({ genre }: GenreItemProps) {
-  const activeGenre = useAppSelector(getActiveGenre);
-  const dispatch = useAppDispatch();
-
-  const handleGenreClick = () => {
-    dispatch(setActiveGenre(genre));
-  };
-
+export default function GenreItem({ genre, isActiveGenre, onClick }: GenreItemProps) {
   return (
     <li
-      className={`catalog__genres-item ${
-        genre === activeGenre ? 'catalog__genres-item--active' : ''
-      }`}
-      onClick={handleGenreClick}
+      className={cn('catalog__genres-item', isActiveGenre && 'catalog__genres-item--active')}
+      onClick={() => onClick(genre)}
     >
       <a className="catalog__genres-link" id={genre}>
         {genre}

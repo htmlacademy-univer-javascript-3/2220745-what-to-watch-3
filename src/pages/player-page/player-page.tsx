@@ -3,8 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
-import PauseButton from '../../components/pause-button/pause-button.tsx';
-import PlayButton from '../../components/play-button/play-button.tsx';
+import PlayPauseButton from '../../components/play-pause-button/play-pause-button.tsx';
 import ExitLink from '../../components/exit-link/exit-link.tsx';
 import ProgressBar from '../../components/progress-bar/progress-bar.tsx';
 import FullScreenButton from '../../components/full-screen-button/full-screen-button.tsx';
@@ -18,13 +17,10 @@ export default function PlayerPage() {
   const playerRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [, setSeconds] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
 
   const handleDataLoaded = () => {
     setIsLoaded(true);
-    setInterval(() => {
-      setSeconds((prevState) => prevState + 1);
-    }, 200);
   };
 
   const handlePlayPauseClick = useCallback(() => {
@@ -53,6 +49,10 @@ export default function PlayerPage() {
       return 0;
     }
     return playerElement.currentTime;
+  };
+
+  const videoPlaying = () => {
+    setCurrentTime(getFilmCurrentTime());
   };
 
   useEffect(() => {
@@ -96,18 +96,15 @@ export default function PlayerPage() {
         src={film.videoLink}
         className="player__video"
         poster={film.backgroundImage}
+        onTimeUpdate={videoPlaying}
       />
       <ExitLink />
 
       <div className="player__controls">
-        <ProgressBar duration={getFilmDuration()} currentTime={getFilmCurrentTime()} />
+        <ProgressBar duration={getFilmDuration()} currentTime={currentTime} />
 
         <div className="player__controls-row">
-          {isPlaying ? (
-            <PauseButton onClick={handlePlayPauseClick} />
-          ) : (
-            <PlayButton onClick={handlePlayPauseClick} />
-          )}
+          <PlayPauseButton isPlaying={isPlaying} onClick={handlePlayPauseClick} />
           <div className="player__name">{film.name}</div>
           <FullScreenButton onClick={handleFullScreenClick} />
         </div>
