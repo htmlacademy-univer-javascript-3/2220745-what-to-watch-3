@@ -9,9 +9,8 @@ describe('Component: TabOverview', () => {
 
     render(<TabOverview filmCard={filmCard} />);
 
-    expect(screen.getByText(`${filmCard.scoresCount} ratings`)).toBeInTheDocument();
-    expect(screen.getByText(`Director: ${filmCard.director}`)).toBeInTheDocument();
-    expect(screen.getByText(`${filmCard.scoresCount} ratings`)).toBeInTheDocument();
+    expect(screen.queryByText(`Director: ${filmCard.director}`)).toBeInTheDocument();
+    expect(screen.queryByText(`${filmCard.scoresCount} ratings`)).toBeInTheDocument();
     expect(screen.queryByText(filmCard.description)).toBeInTheDocument();
   });
 });

@@ -43,7 +43,7 @@ export const makeFakeFilmCard = () =>
     backgroundImage: image.imageUrl(),
     backgroundColor: internet.color(),
     videoLink: image.imageUrl(),
-    description: lorem.text(),
+    description: lorem.sentence(30),
     rating: getRandomNumber(0, 10),
     scoresCount: getRandomNumber(0, 10000),
     director: name.lastName(),
