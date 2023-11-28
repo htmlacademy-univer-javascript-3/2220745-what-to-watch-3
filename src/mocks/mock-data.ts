@@ -1,7 +1,7 @@
 import { datatype, date, image, internet, lorem, music, name } from 'faker';
 import { CommentType, FilmCardType, FilmType, PromoFilmType } from '../types.ts';
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { State } from '../redux/types.ts';
+import { filmsSliceProps, State, userSliceProps } from '../redux/types.ts';
 import { createAPI } from '../services/api.ts';
 import { Action } from 'redux';
 import { ALL_GENRES, AuthorizationStatus, NameSpace } from '../const.ts';
@@ -11,17 +11,17 @@ const getRandomNumber = (min: number, max: number) =>
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
+export const makeFakeFilm = () =>
+  ({
+    id: datatype.uuid(),
+    name: name.firstName(),
+    previewImage: image.imageUrl(),
+    previewVideoLink: image.imageUrl(),
+    genre: music.genre(),
+  } as FilmType);
+
 export const makeFakeFilmsList = () =>
-  new Array(getRandomNumber(9, 12)).fill(null).map(
-    () =>
-      ({
-        id: datatype.uuid(),
-        name: name.firstName(),
-        previewImage: image.imageUrl(),
-        previewVideoLink: image.imageUrl(),
-        genre: music.genre(),
-      } as FilmType)
-  );
+  new Array(getRandomNumber(9, 12)).fill(null).map(() => makeFakeFilm());
 
 export const makeFakePromoFilm = () =>
   ({
@@ -54,17 +54,17 @@ export const makeFakeFilmCard = () =>
     isFavorite: datatype.boolean(),
   } as FilmCardType);
 
+export const makeFakeComment = () =>
+  ({
+    id: datatype.uuid(),
+    date: date.recent().toDateString(),
+    user: name.firstName(),
+    comment: lorem.text(),
+    rating: getRandomNumber(0, 10),
+  } as CommentType);
+
 export const makeFakeComments = () =>
-  new Array(getRandomNumber(1, 6)).fill(null).map(
-    () =>
-      ({
-        id: datatype.uuid(),
-        date: date.recent().toDateString(),
-        user: name.firstName(),
-        comment: lorem.text(),
-        rating: getRandomNumber(0, 10),
-      } as CommentType)
-  );
+  new Array(getRandomNumber(1, 6)).fill(null).map(() => makeFakeComment());
 
 export const makeFakeUser = () => ({
   name: name.firstName(),
@@ -82,7 +82,7 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
   [NameSpace.User]: {
     authorizationStatus: AuthorizationStatus.NoAuth,
     userImage: internet.url(),
-  },
+  } as userSliceProps,
   [NameSpace.Films]: {
     films: makeFakeFilmsList(),
     promoFilm: makeFakePromoFilm(),
@@ -94,7 +94,7 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     activeGenre: ALL_GENRES,
     hasError: false,
     isDataLoading: false,
-  },
+  } as filmsSliceProps,
   ...(initialState ?? {}),
 });
 

@@ -1,5 +1,5 @@
-import React from 'react';
 import { getTimeLeft } from '../../utils.ts';
+import React from 'react';
 
 type PlayButtonProps = {
   duration: number;
@@ -10,11 +10,7 @@ function ProgressBar({ duration, currentTime }: PlayButtonProps) {
   return (
     <div className="player__controls-row">
       <div className="player__time">
-        <progress
-          className="player__progress"
-          value={currentTime}
-          max={duration}
-        />
+        <progress className="player__progress" value={currentTime} max={duration} />
         <div
           className="player__toggler"
           style={{
@@ -24,9 +20,7 @@ function ProgressBar({ duration, currentTime }: PlayButtonProps) {
           Toggler
         </div>
       </div>
-      <div className="player__time-value">
-        {getTimeLeft(duration - currentTime)}
-      </div>
+      <div className="player__time-value">{getTimeLeft(duration - currentTime)}</div>
     </div>
   );
 }

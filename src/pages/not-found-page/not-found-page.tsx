@@ -15,7 +15,7 @@ function ErrorScreen() {
         <title>404</title>
       </Helmet>
       <p className="error__text">404. Page not found</p>
-      <button onClick={handleTryAgain} className="replay replay--error" type="button">
+      <button onClick={handleTryAgain} className="replay replay--error" type="button" data-testid={'go-back'}>
         Back to main page
       </button>
     </>

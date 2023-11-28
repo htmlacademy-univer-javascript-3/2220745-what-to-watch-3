@@ -74,6 +74,7 @@ export default function SignInPage() {
                 id="user-email"
                 onChange={handleFieldChange}
                 required
+                data-testid="user-email"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">
                 Email address
@@ -88,6 +89,7 @@ export default function SignInPage() {
                 id="user-password"
                 onChange={handleFieldChange}
                 required
+                data-testid="user-password"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">
                 Password

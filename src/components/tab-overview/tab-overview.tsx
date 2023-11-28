@@ -5,7 +5,7 @@ type OverviewProps = {
   filmCard: FilmCardType;
 };
 
-export default function Overview({ filmCard }: OverviewProps) {
+export default function TabOverview({ filmCard }: OverviewProps) {
   return (
     <>
       <div className="film-rating">

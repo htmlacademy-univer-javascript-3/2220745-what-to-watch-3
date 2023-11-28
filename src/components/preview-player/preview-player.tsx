@@ -6,7 +6,7 @@ type VideoPlayerProps = {
   activeFilm: string | null;
 };
 
-export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
+export default function PreviewPlayer({ film, activeFilm }: VideoPlayerProps) {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -49,6 +49,7 @@ export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
       ref={playerRef}
       src={film.previewVideoLink}
       muted
+      data-testid={'preview-player'}
     />
   );
 }

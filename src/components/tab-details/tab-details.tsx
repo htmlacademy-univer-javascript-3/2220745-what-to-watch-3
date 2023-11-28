@@ -5,7 +5,7 @@ type DetailsProps = {
   filmCard: FilmCardType;
 };
 
-export default function Details({ filmCard }: DetailsProps) {
+export default function TabDetails({ filmCard }: DetailsProps) {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
