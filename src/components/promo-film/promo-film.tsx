@@ -6,12 +6,13 @@ import MyListButton from '../my-list-button/my-list-button.tsx';
 import React from 'react';
 import { useAppSelector } from '../../redux/hooks.ts';
 import { getAuthorized } from '../../redux/user-slice/selectors.ts';
+import { AppRoute } from '../../const.ts';
 
 type PromoFilmProps = {
   promoFilm: PromoFilmType;
 };
 
-function PromoFilm({ promoFilm }: PromoFilmProps) {
+function PromoFilmComponent({ promoFilm }: PromoFilmProps) {
   const authorized = useAppSelector(getAuthorized);
   return (
     <section className="film-card">
@@ -29,12 +30,7 @@ function PromoFilm({ promoFilm }: PromoFilmProps) {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img
-              src={promoFilm.posterImage}
-              alt={promoFilm.name}
-              width="218"
-              height="327"
-            />
+            <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
@@ -46,7 +42,7 @@ function PromoFilm({ promoFilm }: PromoFilmProps) {
 
             <div className="film-card__buttons">
               <Link
-                to={`player/${promoFilm.id}`}
+                to={AppRoute.Player(promoFilm.id)}
                 className="btn btn--play film-card__button"
                 type="button"
               >
@@ -64,4 +60,4 @@ function PromoFilm({ promoFilm }: PromoFilmProps) {
   );
 }
 
-export default React.memo(PromoFilm);
+export const PromoFilm = React.memo(PromoFilmComponent);

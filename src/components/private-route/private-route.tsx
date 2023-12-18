@@ -10,5 +10,5 @@ type PrivateRouteProps = {
 
 export default function PrivateRoute({ children }: PrivateRouteProps) {
   const authorized = useAppSelector(getAuthorized);
-  return authorized ? children : <Navigate to={AppRoute.SignIn} />;
+  return authorized ? children : <Navigate to={AppRoute.SignIn()} />;
 }

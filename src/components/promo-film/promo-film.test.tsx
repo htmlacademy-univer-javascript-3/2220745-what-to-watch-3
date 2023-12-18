@@ -1,7 +1,7 @@
 import { describe } from 'vitest';
 import { makeFakePromoFilm, makeFakeStore } from '../../mocks/mock-data.ts';
 import { withHistory, withStore } from '../../mocks/mock-components.tsx';
-import PromoFilm from './promo-film.tsx';
+import { PromoFilm } from './promo-film.tsx';
 import { AuthorizationStatus, NameSpace } from '../../const.ts';
 import { render, screen } from '@testing-library/react';
 

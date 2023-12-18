@@ -4,7 +4,7 @@ type FullScreenProps = {
   onClick: () => void;
 };
 
-function FullScreen({ onClick }: FullScreenProps) {
+function FullScreenComponent({ onClick }: FullScreenProps) {
   return (
     <button type="button" className="player__full-screen" onClick={onClick}>
       <svg viewBox="0 0 27 27" width="27" height="27">
@@ -15,4 +15,4 @@ function FullScreen({ onClick }: FullScreenProps) {
   );
 }
 
-export default React.memo(FullScreen);
+export const FullScreenButton = React.memo(FullScreenComponent);

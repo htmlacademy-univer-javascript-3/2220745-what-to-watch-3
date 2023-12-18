@@ -34,27 +34,27 @@ export default function App() {
   return (
     <HelmetProvider>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage />} />
-        <Route path={AppRoute.SignIn} element={<SignInPage />} />
+        <Route path={AppRoute.Main()} element={<MainPage />} />
+        <Route path={AppRoute.SignIn()} element={<SignInPage />} />
         <Route
-          path={AppRoute.MyList}
+          path={AppRoute.MyList()}
           element={
             <PrivateRoute>
               <MyListPage />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Player} element={<PlayerPage />} />
-        <Route path={AppRoute.Film} element={<MoviePage />} />
+        <Route path={AppRoute.Player()} element={<PlayerPage />} />
+        <Route path={AppRoute.Film()} element={<MoviePage />} />
         <Route
-          path={AppRoute.AddReview}
+          path={AppRoute.AddReview()}
           element={
             <PrivateRoute>
               <AddReviewPage />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+        <Route path={AppRoute.NotFound()} element={<NotFoundPage />} />
       </Routes>
     </HelmetProvider>
   );

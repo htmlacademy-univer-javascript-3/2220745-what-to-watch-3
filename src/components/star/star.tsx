@@ -16,6 +16,7 @@ export default function Star({ value, onChange }: StarProps) {
         value={value}
         onChange={onChange}
         data-testid={'star'}
+        required
       />
       <label className="rating__label" htmlFor={`star-${value}`}>
         Rating {value}

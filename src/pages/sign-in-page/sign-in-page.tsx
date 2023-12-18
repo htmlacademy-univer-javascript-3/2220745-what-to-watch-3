@@ -1,10 +1,8 @@
 import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks.ts';
 import { loginAction } from '../../redux/api-actions.ts';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const.ts';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 
@@ -15,7 +13,6 @@ export type UserFormValues = {
 
 export default function SignInPage() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<UserFormValues>({
     email: '',
     password: '',
@@ -36,8 +33,7 @@ export default function SignInPage() {
     });
   };
 
-  const handleSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = () => {
     if (!validateEmail(formData)) {
       toast.warn('Please enter a valid email address');
       return;
@@ -48,7 +44,6 @@ export default function SignInPage() {
     }
 
     dispatch(loginAction(formData));
-    navigate(AppRoute.Main);
   };
 
   return (
@@ -97,12 +92,7 @@ export default function SignInPage() {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button
-              className="sign-in__btn"
-              type="submit"
-              onSubmit={handleSubmit}
-              onClick={handleSubmit}
-            >
+            <button className="sign-in__btn" type="button" onClick={handleSubmit}>
               Sign in
             </button>
           </div>

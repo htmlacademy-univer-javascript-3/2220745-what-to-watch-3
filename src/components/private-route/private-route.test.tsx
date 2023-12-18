@@ -22,9 +22,9 @@ describe('Component: PrivateRoute', () => {
     const notExpectedText = 'private route';
     const preparedComponent = withHistory(
       <Routes>
-        <Route path={AppRoute.SignIn} element={<span>{expectedText}</span>} />
+        <Route path={AppRoute.SignIn()} element={<span>{expectedText}</span>} />
         <Route
-          path={AppRoute.MyList}
+          path={AppRoute.MyList()}
           element={
             <PrivateRoute>
               <span>{notExpectedText}</span>
@@ -49,9 +49,9 @@ describe('Component: PrivateRoute', () => {
     const expectedText = 'private route';
     const preparedComponent = withHistory(
       <Routes>
-        <Route path={AppRoute.SignIn} element={<span>{notExpectedText}</span>} />
+        <Route path={AppRoute.SignIn()} element={<span>{notExpectedText}</span>} />
         <Route
-          path={AppRoute.MyList}
+          path={AppRoute.MyList()}
           element={
             <PrivateRoute>
               <span>{expectedText}</span>

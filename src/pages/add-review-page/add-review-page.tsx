@@ -7,6 +7,7 @@ import { fetchFilmDataAction } from '../../redux/api-actions.ts';
 import { useEffect } from 'react';
 import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 import { Helmet } from 'react-helmet-async';
+import { AppRoute } from '../../const.ts';
 
 export default function AddReviewPage() {
   const { id } = useParams();
@@ -41,7 +42,7 @@ export default function AddReviewPage() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/film/${filmCard.id}`} className="breadcrumbs__link">
+                <Link to={AppRoute.Film(filmCard.id)} className="breadcrumbs__link">
                   {filmCard.name}
                 </Link>
               </li>
