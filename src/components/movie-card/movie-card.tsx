@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PreviewPlayer from '../preview-player/preview-player.tsx';
 import { FilmType } from '../../types.ts';
+import { AppRoute } from '../../const.ts';
 
 type MovieCardProps = {
   film: FilmType;
@@ -17,14 +18,12 @@ export default function MovieCard({ film, activeFilm, onMouseOver, onMouseOut }:
       onMouseOut={() => onMouseOut()}
       data-testid={'movie'}
     >
-      <div className="small-film-card__image">
-        <PreviewPlayer film={film} activeFilm={activeFilm} />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>
-          {film.name}
-        </Link>
-      </h3>
+      <Link className="small-film-card__link" to={AppRoute.Film(film.id)}>
+        <div className="small-film-card__image">
+          <PreviewPlayer film={film} activeFilm={activeFilm} />
+        </div>
+        <h3 className="small-film-card__title">{film.name}</h3>
+      </Link>
     </article>
   );
 }

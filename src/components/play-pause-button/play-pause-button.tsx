@@ -5,7 +5,7 @@ type PauseButtonProps = {
   onClick: () => void;
 };
 
-function PlayPauseButton({ onClick, isPlaying }: PauseButtonProps) {
+function PlayPauseButtonComponent({ onClick, isPlaying }: PauseButtonProps) {
   return (
     <button type="button" className="player__play" onClick={onClick}>
       <svg viewBox="0 0 20 20" width="20" height="20">
@@ -16,4 +16,4 @@ function PlayPauseButton({ onClick, isPlaying }: PauseButtonProps) {
   );
 }
 
-export default React.memo(PlayPauseButton);
+export const PlayPauseButton = React.memo(PlayPauseButtonComponent);

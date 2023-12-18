@@ -1,4 +1,4 @@
-import { getTimeLeft } from '../../utils.ts';
+import { getTimeLeft } from '../../utils/utils.ts';
 import React from 'react';
 
 type PlayButtonProps = {
@@ -6,7 +6,7 @@ type PlayButtonProps = {
   currentTime: number;
 };
 
-function ProgressBar({ duration, currentTime }: PlayButtonProps) {
+function ProgressBarComponent({ duration, currentTime }: PlayButtonProps) {
   return (
     <div className="player__controls-row">
       <div className="player__time">
@@ -25,4 +25,4 @@ function ProgressBar({ duration, currentTime }: PlayButtonProps) {
   );
 }
 
-export default React.memo(ProgressBar);
+export const ProgressBar = React.memo(ProgressBarComponent);

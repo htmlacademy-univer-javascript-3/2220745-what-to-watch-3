@@ -1,8 +1,8 @@
 import MoviesList from '../../components/movies-list/movies-list.tsx';
 import GenresList from '../../components/genres-list/genres-list.tsx';
 import { useAppSelector } from '../../redux/hooks.ts';
-import ShowMoreButton from '../../components/movies-list/show-more-button.tsx';
-import PromoFilm from '../../components/promo-film/promo-film.tsx';
+import ShowMoreButton from '../../components/show-more-button/show-more-button.tsx';
+import { PromoFilm } from '../../components/promo-film/promo-film.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { useState } from 'react';
@@ -15,6 +15,10 @@ export default function MainPage() {
   const [filmsCount, setFilmsCount] = useState(SHOW_FILMS_COUNT);
   const films = useFilmsByGenre();
   const promoFilm = useAppSelector(getPromoFilm);
+
+  const handleFilmsCountReset = () => {
+    setFilmsCount(SHOW_FILMS_COUNT);
+  };
 
   const handleShowMoreButtonClick = () =>
     setFilmsCount((prevState) => prevState + SHOW_FILMS_COUNT);
@@ -31,7 +35,7 @@ export default function MainPage() {
 
           {films.length !== 0 ? (
             <>
-              <GenresList />
+              <GenresList onChange={handleFilmsCountReset} />
               <MoviesList films={films} filmsCount={filmsCount} />
             </>
           ) : (

@@ -1,4 +1,4 @@
-import { Grade } from './const.ts';
+import { Grade } from '../const.ts';
 
 const getFormattedTime = (time: number) => {
   const hours = Math.floor(time / 60);
@@ -39,10 +39,4 @@ const getFilmGrade = (rating: number): Grade => {
   }
 };
 
-export {
-  getFormattedTime,
-  getFormattedDate,
-  getFilmGrade,
-  getFormattedRating,
-  getTimeLeft,
-};
+export { getFormattedTime, getFormattedDate, getFilmGrade, getFormattedRating, getTimeLeft };

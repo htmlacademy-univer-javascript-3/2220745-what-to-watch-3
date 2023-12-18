@@ -1,4 +1,4 @@
-import { getFormattedTime } from '../../utils.ts';
+import { getFormattedTime } from '../../utils/utils.ts';
 import { FilmCardType } from '../../types.ts';
 
 type DetailsProps = {
@@ -28,9 +28,7 @@ export default function TabDetails({ filmCard }: DetailsProps) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">
-            {getFormattedTime(filmCard.runTime)}
-          </span>
+          <span className="film-card__details-value">{getFormattedTime(filmCard.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

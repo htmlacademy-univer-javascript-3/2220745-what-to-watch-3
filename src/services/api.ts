@@ -12,8 +12,7 @@ type DetailMessageType = {
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true,
+  [StatusCodes.CONFLICT]: true,
 };
 
 const shouldDisplayError = (response: AxiosResponse) => StatusCodeMapping[response.status];
@@ -40,8 +39,8 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response && error.response.status === 404) {
-        browserHistory.push(AppRoute.NotFound);
+      if (error.response && error.response.status === StatusCodes.NOT_FOUND) {
+        browserHistory.push(AppRoute.NotFound());
       } else if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = error.response.data;
 

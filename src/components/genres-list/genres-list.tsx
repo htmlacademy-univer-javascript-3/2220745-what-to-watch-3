@@ -4,13 +4,18 @@ import { getActiveGenre, getGenres } from '../../redux/films-slice/selectors.ts'
 import { setActiveGenre } from '../../redux/films-slice/films-slice.ts';
 import { Genre } from '../../types.ts';
 
-export default function GenresList() {
+type GenresListProps = {
+  onChange: () => void;
+};
+
+export default function GenresList({ onChange }: GenresListProps) {
   const genres = useAppSelector(getGenres);
   const activeGenre = useAppSelector(getActiveGenre);
   const dispatch = useAppDispatch();
 
   const handleGenreClick = (genre: Genre) => {
     dispatch(setActiveGenre(genre));
+    onChange();
   };
 
   return (

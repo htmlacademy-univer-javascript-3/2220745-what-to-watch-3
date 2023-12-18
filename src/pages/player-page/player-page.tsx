@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
-import PlayPauseButton from '../../components/play-pause-button/play-pause-button.tsx';
-import ExitLink from '../../components/exit-link/exit-link.tsx';
-import ProgressBar from '../../components/progress-bar/progress-bar.tsx';
-import FullScreenButton from '../../components/full-screen-button/full-screen-button.tsx';
+import { PlayPauseButton } from '../../components/play-pause-button/play-pause-button.tsx';
+import { ExitLink } from '../../components/exit-link/exit-link.tsx';
+import { ProgressBar } from '../../components/progress-bar/progress-bar.tsx';
+import { FullScreenButton } from '../../components/full-screen-button/full-screen-button.tsx';
 import { Helmet } from 'react-helmet-async';
 
 export default function PlayerPage() {
@@ -51,7 +51,7 @@ export default function PlayerPage() {
     return playerElement.currentTime;
   };
 
-  const videoPlaying = () => {
+  const handleTimeChange = () => {
     setCurrentTime(getFilmCurrentTime());
   };
 
@@ -96,7 +96,7 @@ export default function PlayerPage() {
         src={film.videoLink}
         className="player__video"
         poster={film.backgroundImage}
-        onTimeUpdate={videoPlaying}
+        onTimeUpdate={handleTimeChange}
       />
       <ExitLink />
 

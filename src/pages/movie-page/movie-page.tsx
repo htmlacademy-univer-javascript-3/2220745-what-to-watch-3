@@ -1,4 +1,4 @@
-import { MORE_LIKE_FILMS_COUNT } from '../../const.ts';
+import { AppRoute, MORE_LIKE_FILMS_COUNT } from '../../const.ts';
 import { Link, useParams } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs.tsx';
 import MoviesList from '../../components/movies-list/movies-list.tsx';
@@ -60,7 +60,7 @@ export default function MoviePage() {
 
               <div className="film-card__buttons">
                 <Link
-                  to={`/player/${filmCard.id}`}
+                  to={AppRoute.Player(filmCard.id)}
                   className="btn btn--play film-card__button"
                   type="button"
                 >
@@ -72,7 +72,7 @@ export default function MoviePage() {
                 {authorized && (
                   <>
                     <MyListButton filmCard={filmCard} />
-                    <Link to={'review'} className="btn film-card__button">
+                    <Link to={AppRoute.AddReview(filmCard.id)} className="btn film-card__button">
                       Add review
                     </Link>
                   </>

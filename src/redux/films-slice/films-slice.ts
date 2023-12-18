@@ -41,9 +41,6 @@ export const filmsSlice = createSlice({
     setActiveGenre: (state, action: PayloadAction<Genre>) => {
       state.activeGenre = action.payload;
     },
-    dropError: (state) => {
-      state.hasError = false;
-    },
   },
   extraReducers(builder) {
     builder
@@ -108,4 +105,4 @@ export const filmsSlice = createSlice({
   },
 });
 
-export const { setActiveGenre, dropError } = filmsSlice.actions;
+export const { setActiveGenre } = filmsSlice.actions;

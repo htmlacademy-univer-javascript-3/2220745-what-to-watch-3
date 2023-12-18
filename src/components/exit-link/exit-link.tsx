@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const.ts';
 
-function ExitLink() {
+function ExitLinkComponent() {
   return (
     <Link
-      to="/"
+      to={AppRoute.Main()}
       style={{ textDecoration: 'none' }}
       type="button"
       className="player__exit"
@@ -14,4 +15,4 @@ function ExitLink() {
   );
 }
 
-export default React.memo(ExitLink);
+export const ExitLink = React.memo(ExitLinkComponent);

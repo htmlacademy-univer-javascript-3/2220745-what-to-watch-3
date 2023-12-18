@@ -25,7 +25,7 @@ export const loginAction = createAsyncThunk<
 >('user/login', async (form, { dispatch, extra: api }) => {
   const { data } = await api.post<AuthInfo>(ApiRoute.Login(), form);
   saveToken(data.token);
-  dispatch(redirectToRoute(AppRoute.Main));
+  dispatch(redirectToRoute(AppRoute.Main()));
   return data.avatarUrl;
 });
 
