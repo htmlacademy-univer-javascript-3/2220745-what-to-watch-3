@@ -8,7 +8,11 @@ import { filmsSliceProps } from '../../redux/types.ts';
 
 describe('Component: GenreItem', () => {
   it('should render correct', () => {
-    const { withStoreComponent, mockStore } = withStore(<GenresList />, makeFakeStore());
+    const mockOnChange = vi.fn();
+    const { withStoreComponent, mockStore } = withStore(
+      <GenresList onChange={mockOnChange} />,
+      makeFakeStore()
+    );
     const filmsSlice = mockStore.getState()[NameSpace.Films] as filmsSliceProps;
 
     render(withStoreComponent);
