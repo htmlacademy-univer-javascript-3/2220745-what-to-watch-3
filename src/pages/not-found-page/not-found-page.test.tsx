@@ -23,6 +23,6 @@ describe('Page: NotFound', () => {
     render(withHistoryComponent);
     await userEvent.click(screen.getByTestId('go-back'));
 
-    expect(mockHistory.location.pathname).toBe(AppRoute.Main);
+    expect(mockHistory.location.pathname).toBe(AppRoute.Main());
   });
 });

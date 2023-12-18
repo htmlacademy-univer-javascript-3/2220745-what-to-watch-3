@@ -29,8 +29,8 @@ describe('Redirect middleware', () => {
   });
 
   it('should redirect to "/" with redirectToRoute action', () => {
-    const redirectAction = redirectToRoute(AppRoute.Main);
+    const redirectAction = redirectToRoute(AppRoute.Main());
     store.dispatch(redirectAction);
-    expect(browserHistory.location.pathname).toBe(AppRoute.Main);
+    expect(browserHistory.location.pathname).toBe(AppRoute.Main());
   });
 });
